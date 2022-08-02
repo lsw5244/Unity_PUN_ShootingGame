@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using Photon.Pun;
 
@@ -8,15 +9,19 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 {
     string gameVersion = "0.1";
 
+    [SerializeField]
+    private Text networkStateText;
+    [SerializeField]
+    private Button roomConnectBtn;
+
     private void Start()
     {
         Connect();
     }
 
-    // Photon Server에 접속하는 함수
+    // Photon Server에 접속
     void Connect()
     {
-        Debug.Log("Connect호출 !!");
         if (PhotonNetwork.IsConnected == true)
         {
             PhotonNetwork.JoinRandomRoom();
@@ -31,13 +36,14 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("서버에 입장했습니다.");
-        // Lobby에 접속하는 함수
+        networkStateText.text = "서버에 접속되었습니다.";
+        // Lobby에 접속
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("로비에 입장하였습니다.");
+        networkStateText.text = "로비에 입장하였습니다.";
+        roomConnectBtn.interactable = true;
     }
 }
