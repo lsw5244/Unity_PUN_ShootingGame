@@ -7,32 +7,10 @@ using Photon.Pun;
 
 public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 {
-    string gameVersion = "0.1";
-
     [SerializeField]
     private Text networkStateText;
     [SerializeField]
     private Button roomConnectBtn;
-
-    private void Start()
-    {
-        Connect();
-    }
-
-    // Photon Server에 접속
-    void Connect()
-    {
-        if (PhotonNetwork.IsConnected == true)
-        {
-            PhotonNetwork.JoinRandomRoom();
-        }
-        else
-        {
-            PhotonNetwork.GameVersion = gameVersion;
-            // 해당 버전으로 photon 클라이드로 연결되는 시작점 ( Photon Online Server에 접속하는 함수 )
-            PhotonNetwork.ConnectUsingSettings();
-        }
-    }
 
     public override void OnConnectedToMaster()
     {
