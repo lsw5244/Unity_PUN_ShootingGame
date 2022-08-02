@@ -36,15 +36,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Connect()
     {
         Debug.Log("Connect호출 !!");
-        if (PhotonNetwork.IsConnected == true)
+        if (PhotonNetwork.IsConnected == false)
         {
-            PhotonNetwork.JoinRandomRoom();
-        }
-        else
-        {
+            //PhotonNetwork.JoinRandomRoom();
             PhotonNetwork.GameVersion = gameVersion;
             // 해당 버전으로 photon 클라이드로 연결되는 시작점 ( Photon Online Server에 접속하는 함수 )
             PhotonNetwork.ConnectUsingSettings();
         }
+
     }
 }
