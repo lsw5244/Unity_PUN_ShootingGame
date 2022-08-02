@@ -7,7 +7,24 @@ using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    private static NetworkManager _instance;
+    public static NetworkManager Instance { get { return _instance; } }
+    
     string gameVersion = "0.1";
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Debug.LogWarning("씬에 두개 이상의 네트워크 매니저가 존재합니다!");
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
