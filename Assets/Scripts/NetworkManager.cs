@@ -43,6 +43,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             // 해당 버전으로 photon 클라이드로 연결되는 시작점 ( Photon Online Server에 접속하는 함수 )
             PhotonNetwork.ConnectUsingSettings();
         }
+    }
 
+    public bool EnterRoom(string RoomName)
+    {
+        //PhotonNetwork.LoadLevel(1);   // 마스터 클라이언트에서 호출하는 것
+
+        if ( PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null) )
+        {
+            return true;
+        }
+
+        return false;        
     }
 }
