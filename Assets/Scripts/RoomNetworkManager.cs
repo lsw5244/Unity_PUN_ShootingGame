@@ -15,6 +15,11 @@ public class RoomNetworkManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject gameWaitingUI;
 
+    [SerializeField]
+    private bool serverReady = false;
+    [SerializeField]
+    private bool clientReady = false;
+
     public override void OnJoinedRoom()
     {
         if (PhotonNetwork.IsMasterClient == true)
@@ -32,5 +37,37 @@ public class RoomNetworkManager : MonoBehaviourPunCallbacks
     {
         matchingUI.SetActive(false);
         matchingCompleteUI.SetActive(true);
+    }
+
+    public void GameReady()
+    {
+        matchingCompleteUI.SetActive(false);
+        gameWaitingUI.SetActive(true);
+
+        if (PhotonNetwork.IsMasterClient == true)
+        {
+            serverReady = true;
+
+            GameStartCheck();
+        }
+        else
+        {
+            photonView.RPC("ClientReady", RpcTarget.MasterClient);
+        }
+    }
+
+    [PunRPC]
+    void ClientReady()
+    {
+        clientReady = true;
+        GameStartCheck();
+    }
+    
+    void GameStartCheck()
+    {
+        if( clientReady == true && serverReady == true)
+        {
+            PhotonNetwork.LoadLevel(2);
+        }
     }
 }
