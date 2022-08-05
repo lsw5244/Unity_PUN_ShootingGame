@@ -10,29 +10,33 @@ public class PlayerMove : MonoBehaviour
     private Vector2 moveVelocity;
     private float moveVelocityX;
 
+    private float horizontalInput;
+
     void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
         state = GetComponent<PlayerState>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        //rigi.velocity = new Vector2(state.moveSpeed, rigi.velocity.y);
+        Move();
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        //rigi.velocity = new Vector2(state.moveSpeed, rigi.velocity.y);
+        Jump();
+    }
 
-        float h = Input.GetAxis("Horizontal");
-        Debug.Log(h);
+    void Move()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
 
-        if(h > 0.1f)
+        if (horizontalInput > 0.1f)
         {
             moveVelocity.x = state.moveSpeed;
         }
-        else if(h < -0.1f)
+        else if (horizontalInput < -0.1f)
         {
             moveVelocity.x = -state.moveSpeed;
         }
@@ -41,7 +45,18 @@ public class PlayerMove : MonoBehaviour
             moveVelocity.x = 0f;
         }
 
-        rigi.velocity = moveVelocity;
+        moveVelocity.y = rigi.velocity.y;
 
+        rigi.velocity = moveVelocity;
+    }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Jump!!!");
+            rigi.velocity = Vector2.zero;
+            rigi.AddForce(Vector2.up * state.jumpPower);
+        }
     }
 }

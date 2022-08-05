@@ -1126,7 +1126,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1238,7 +1238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  moveSpeed: 5
+  moveSpeed: 7
+  jumpPower: 400
 --- !u!1 &2013210990
 GameObject:
   m_ObjectHideFlags: 0
