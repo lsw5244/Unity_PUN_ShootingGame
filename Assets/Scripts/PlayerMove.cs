@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+
 public class PlayerMove : MonoBehaviour
 {
     private Rigidbody2D rigi;
@@ -12,20 +14,28 @@ public class PlayerMove : MonoBehaviour
 
     private float horizontalInput;
 
+    private PhotonView photonView;
     void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
         state = GetComponent<PlayerState>();
+        photonView = GetComponent<PhotonView>();
     }
 
     void FixedUpdate()
     {
-        Move();
+        if(photonView.IsMine == true)
+        {
+            Move();
+        }
     }
 
     void Update()
     {
-        Jump();
+        if (photonView.IsMine == true)
+        {
+            Jump();
+        }
     }
 
     void Move()
