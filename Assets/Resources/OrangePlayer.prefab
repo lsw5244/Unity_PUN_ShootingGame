@@ -199,7 +199,7 @@ MonoBehaviour:
   HP: 100
   moveSpeed: 7
   jumpPower: 400
-  bulletPower: 100
+  bulletPower: 750
   attackDamage: 40
 --- !u!114 &8552436087283092387
 MonoBehaviour:
