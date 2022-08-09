@@ -14,6 +14,8 @@ public class PlayerFire : MonoBehaviour
 
     [SerializeField]
     private Transform gunPivot;
+    [SerializeField]
+    private Transform firePos;
 
     void Start()
     {
@@ -36,7 +38,7 @@ public class PlayerFire : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            GameObject bullet = PhotonNetwork.Instantiate("TempBullet", Vector2.zero, Quaternion.identity);
+            GameObject bullet = PhotonNetwork.Instantiate("TempBullet", firePos.position, Quaternion.identity);
             bullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
         }
     }
