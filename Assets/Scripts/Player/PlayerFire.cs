@@ -7,7 +7,6 @@ using Photon.Pun;
 public class PlayerFire : MonoBehaviour
 {
     private PhotonView photonView;
-
     private PlayerState state;
 
     private Vector2 mousePosition;
@@ -16,6 +15,8 @@ public class PlayerFire : MonoBehaviour
     private Transform gunPivot;
     [SerializeField]
     private Transform firePos;
+
+    private bool canFire = true;
 
     void Start()
     {
@@ -38,6 +39,12 @@ public class PlayerFire : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            if(canFire == false)
+            {
+                return;
+            }
+
+            StartCoroutine(ShootingDelay());
             GameObject bullet = PhotonNetwork.Instantiate("TempBullet", firePos.position, Quaternion.identity);
             bullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
         }
@@ -63,5 +70,12 @@ public class PlayerFire : MonoBehaviour
         {
             gunPivot.rotation = gunPivot.rotation * Quaternion.Euler(0f, 0f, -angle);
         }
+    }
+
+    IEnumerator ShootingDelay()
+    {
+        canFire = false;
+        yield return new WaitForSeconds(state.fireDelay);
+        canFire = true;
     }
 }
