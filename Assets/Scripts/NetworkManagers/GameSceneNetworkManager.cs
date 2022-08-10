@@ -11,15 +11,20 @@ public class GameSceneNetworkManager : MonoBehaviour
     [SerializeField]
     private Transform rSpawnPos;
 
+    [SerializeField]
+    private string lPlayerPrefabName;
+    [SerializeField]
+    private string rPlayerPrefabName;
+
     private void Awake()
     {
         if(PhotonNetwork.IsMasterClient == true)
         {
-            PhotonNetwork.Instantiate("OrangePlayer", lSpawnPos.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(lPlayerPrefabName, lSpawnPos.position, Quaternion.identity);
         }
         else
         {
-            PhotonNetwork.Instantiate("OrangePlayer", rSpawnPos.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(rPlayerPrefabName, rSpawnPos.position, Quaternion.identity);
         }
     }
 }
