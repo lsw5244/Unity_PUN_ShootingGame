@@ -148,6 +148,7 @@ MonoBehaviour:
   HP: 100
   moveSpeed: 7
   jumpPower: 400
+  fireDelay: 0.2
   bulletPower: 750
   attackDamage: 40
 --- !u!114 &1296844145618780352
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPivot: {fileID: 1296844146726756190}
   firePos: {fileID: 1296844145925325409}
+  bulletName: Bullet
 --- !u!1 &1296844145925325438
 GameObject:
   m_ObjectHideFlags: 0
