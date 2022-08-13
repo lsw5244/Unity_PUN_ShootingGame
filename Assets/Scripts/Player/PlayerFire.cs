@@ -82,7 +82,7 @@ public class PlayerFire : MonoBehaviour
     {
         Vector2 toMousePosition = mousePosition - (Vector2)gunPivot.position;
 
-        float dot = Vector2.Dot(gunPivot.right, toMousePosition);   // 좌- 우+ 확인 가능
+        float dot = Vector2.Dot(gunPivot.right, toMousePosition);   // 좌- 우+
         float angle = Mathf.Acos(dot / toMousePosition.magnitude) * Mathf.Rad2Deg;    // 마우스 포인터와의 각도
 
         if (float.IsNaN(angle) == true)
