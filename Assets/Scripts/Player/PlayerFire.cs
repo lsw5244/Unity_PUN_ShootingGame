@@ -18,6 +18,9 @@ public class PlayerFire : MonoBehaviour
 
     private bool canFire = true;
 
+    private GameObject[] bulletPools;
+    private GameObject selectBullet;
+
     [SerializeField]
     private string bulletName;
 
@@ -25,11 +28,22 @@ public class PlayerFire : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         state = GetComponent<PlayerState>();
+
+        if (photonView.IsMine == true)
+        {
+            bulletPools = new GameObject[state.maxBulletCount * 2]; // 최대 장탄수의 2배를 미리 만든다.
+
+            for (int i = 0; i < bulletPools.Length; ++i)
+            {
+                bulletPools[i] = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
+                bulletPools[i].SetActive(false);
+            }
+        }
     }
 
     void Update()
     {
-        if(photonView.IsMine == true)
+        if (photonView.IsMine == true)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GunPivotSetting();
@@ -40,9 +54,9 @@ public class PlayerFire : MonoBehaviour
 
     void Fire()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if(canFire == false)
+            if (canFire == false)
             {
                 return;
             }
@@ -54,8 +68,13 @@ public class PlayerFire : MonoBehaviour
             float dot = Vector2.Dot(gunPivot.right, toMousePosition);   // 좌- 우+ 확인 가능
             float angle = Mathf.Acos(dot / toMousePosition.magnitude) * Mathf.Rad2Deg;    // 마우스 포인터와의 각도
 
-            GameObject bullet = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
-            bullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
+            selectBullet = GetBullet();
+            if(selectBullet != null)
+            {
+                selectBullet?.SetActive(true);
+                selectBullet.transform.position = firePos.position;
+                selectBullet?.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
+            }            
         }
     }
 
@@ -86,5 +105,18 @@ public class PlayerFire : MonoBehaviour
         canFire = false;
         yield return new WaitForSeconds(state.fireDelay);
         canFire = true;
+    }
+
+    GameObject GetBullet()
+    {
+        for (int i = 0; i < bulletPools.Length; ++i)
+        {
+            if (bulletPools[i].activeSelf == false)
+            {
+                return bulletPools[i];
+            }
+        }
+
+        return null;
     }
 }

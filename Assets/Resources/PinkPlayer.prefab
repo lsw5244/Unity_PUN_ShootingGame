@@ -377,6 +377,7 @@ MonoBehaviour:
   fireDelay: 0.2
   bulletPower: 750
   attackDamage: 40
+  maxBulletCount: 3
 --- !u!114 &3068309942534854407
 MonoBehaviour:
   m_ObjectHideFlags: 0

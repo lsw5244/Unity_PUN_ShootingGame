@@ -11,4 +11,6 @@ public class PlayerState : MonoBehaviour
     public float fireDelay = 0.2f;
     public float bulletPower = 100f;
     public float attackDamage = 40f;
+
+    public int maxBulletCount = 3;
 }
