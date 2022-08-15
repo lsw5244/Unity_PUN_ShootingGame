@@ -23,6 +23,11 @@ public class PlayerFire : MonoBehaviour
 
     [SerializeField]
     private string bulletName;
+    [SerializeField]
+    private string bulletCountUIName;
+
+    private GameObject[] bulletCountUIs;
+    private int remainingBullet;
 
     void Start()
     {
@@ -32,13 +37,37 @@ public class PlayerFire : MonoBehaviour
         if (photonView.IsMine == true)
         {
             bulletPools = new GameObject[state.maxBulletCount * 2]; // 최대 장탄수의 2배를 미리 만든다.
+            bulletCountUIs = new GameObject[state.maxBulletCount];
 
-            for (int i = 0; i < bulletPools.Length; ++i)
+            for (int i = 0; i < state.maxBulletCount * 2; ++i)
             {
                 bulletPools[i] = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
                 bulletPools[i].SetActive(false);
             }
+
+            for (int i = 0; i < state.maxBulletCount; ++i)
+            {
+                bulletCountUIs[i] = PhotonNetwork.Instantiate(bulletCountUIName, Vector3.zero, Quaternion.identity);
+                bulletCountUIs[i].transform.SetParent(transform);
+            }
+
+            Reload();
         }
+    }
+
+    void Reload()
+    {
+        float xPos = -0.45f;
+        float yPos = -0.3f;
+
+        for(int i = 0; i < state.maxBulletCount; ++i)
+        {
+            bulletCountUIs[i].transform.localPosition = new Vector3(xPos, yPos, 0f);
+            bulletCountUIs[i].SetActive(true);
+            yPos += 0.15f;
+        }
+
+        remainingBullet = state.maxBulletCount;
     }
 
     void Update()
@@ -74,7 +103,10 @@ public class PlayerFire : MonoBehaviour
                 selectBullet?.SetActive(true);
                 selectBullet.transform.position = firePos.position;
                 selectBullet?.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
-            }            
+
+                bulletCountUIs[remainingBullet - 1].SetActive(false);
+                --remainingBullet;
+            }
         }
     }
 
