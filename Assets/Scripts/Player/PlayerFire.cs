@@ -85,7 +85,7 @@ public class PlayerFire : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (canFire == false)
+            if (canFire == false || remainingBullet <= 0)
             {
                 return;
             }

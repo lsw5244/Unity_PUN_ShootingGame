@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+
 public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rigi;
+    private PhotonView photonView;
 
-    private void Start()
+    private void Awake()
     {
         rigi = GetComponent<Rigidbody2D>();
+        photonView = GetComponent<PhotonView>();
     }
 
     public void Shoot(Vector2 mousePosition, float bulletPower, float attackDamage)
