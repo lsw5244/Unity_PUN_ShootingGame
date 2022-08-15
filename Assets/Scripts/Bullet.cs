@@ -13,12 +13,22 @@ public class Bullet : MonoBehaviour
     {
         rigi = GetComponent<Rigidbody2D>();
         photonView = GetComponent<PhotonView>();
+
+        gameObject.SetActive(false);
     }
 
     public void Shoot(Vector2 mousePosition, float bulletPower, float attackDamage)
     {
+        photonView.RPC("Fire", RpcTarget.All, mousePosition, bulletPower, attackDamage);
+    }
+
+    [PunRPC]
+    void Fire(Vector2 mousePosition, float bulletPower, float attackDamage)
+    {
+        gameObject.SetActive(true);
         Vector2 shootDirection = (mousePosition - (Vector2)transform.position).normalized;
         GetComponent<Rigidbody2D>().AddForce(shootDirection * bulletPower);
+        Debug.Log("Fire!!!!Q!!");
     }
 
     private void Update()

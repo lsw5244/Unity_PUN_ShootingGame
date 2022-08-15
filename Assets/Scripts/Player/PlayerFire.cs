@@ -100,7 +100,7 @@ public class PlayerFire : MonoBehaviour
             selectBullet = GetBullet();
             if(selectBullet != null)
             {
-                selectBullet.SetActive(true);
+                //selectBullet.SetActive(true);
                 selectBullet.transform.position = firePos.position;
                 selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
 
