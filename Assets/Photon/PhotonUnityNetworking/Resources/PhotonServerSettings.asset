@@ -45,6 +45,10 @@ MonoBehaviour:
   - GameStart
   - SetDisable
   - SetEnable
+  - Reload
+  - ChangeActiveState
+  - PositionSetting
+  - ChangeParentTransform
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

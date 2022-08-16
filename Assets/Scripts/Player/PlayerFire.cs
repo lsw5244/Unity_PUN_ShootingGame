@@ -29,7 +29,7 @@ public class PlayerFire : MonoBehaviour
     private GameObject[] bulletCountUIs;
     private int remainingBullet;
 
-    void Start()
+    void Awake()
     {
         photonView = GetComponent<PhotonView>();
         state = GetComponent<PlayerState>();
@@ -42,13 +42,17 @@ public class PlayerFire : MonoBehaviour
             for (int i = 0; i < state.maxBulletCount * 2; ++i)
             {
                 bulletPools[i] = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
-                bulletPools[i].SetActive(false);
             }
 
+            float xPos = -0.45f;
+            float yPos = -0.3f;
             for (int i = 0; i < state.maxBulletCount; ++i)
             {
                 bulletCountUIs[i] = PhotonNetwork.Instantiate(bulletCountUIName, Vector3.zero, Quaternion.identity);
-                bulletCountUIs[i].transform.SetParent(transform);
+                //bulletCountUIs[i].transform.SetParent(transform);
+                Debug.Log(transform);
+                bulletCountUIs[i].GetComponent<BulletCountUI>().Init(new Vector3(xPos, yPos, 0f), transform, true);
+                yPos += 0.15f;
             }
 
             Reload();
@@ -57,16 +61,13 @@ public class PlayerFire : MonoBehaviour
 
     void Reload()
     {
-        float xPos = -0.45f;
-        float yPos = -0.3f;
-
-        for(int i = 0; i < state.maxBulletCount; ++i)
+        // UI 정렬하기
+        for (int i = 0; i < state.maxBulletCount; ++i)
         {
-            bulletCountUIs[i].transform.localPosition = new Vector3(xPos, yPos, 0f);
-            bulletCountUIs[i].SetActive(true);
-            yPos += 0.15f;
+            bulletCountUIs[i].GetComponent<BulletCountUI>().ActiveSetting(true);
         }
 
+        // 총알 다시 채우기
         remainingBullet = state.maxBulletCount;
     }
 
@@ -78,6 +79,15 @@ public class PlayerFire : MonoBehaviour
             GunPivotSetting();
 
             Fire();
+
+
+            //if(Input.GetMouseButtonDown(2))
+            //{
+            //    for(int i = 0; i < bulletCountUIs.Length; ++i)
+            //    {
+            //        bulletCountUIs[i].GetComponent<BulletCountUI>().SetParentTransform(transform);
+            //    }
+            //}
         }
     }
 
@@ -104,7 +114,7 @@ public class PlayerFire : MonoBehaviour
                 selectBullet.transform.position = firePos.position;
                 selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
 
-                bulletCountUIs[remainingBullet - 1].SetActive(false);
+                bulletCountUIs[remainingBullet - 1].GetComponent<BulletCountUI>().ActiveSetting(false);
                 --remainingBullet;
             }
         }

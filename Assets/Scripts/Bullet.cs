@@ -28,7 +28,6 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(true);
         Vector2 shootDirection = (mousePosition - (Vector2)transform.position).normalized;
         GetComponent<Rigidbody2D>().AddForce(shootDirection * bulletPower);
-        Debug.Log("Fire!!!!Q!!");
     }
 
     private void Update()
