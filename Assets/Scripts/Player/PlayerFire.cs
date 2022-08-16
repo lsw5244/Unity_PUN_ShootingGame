@@ -24,7 +24,7 @@ public class PlayerFire : MonoBehaviour
     [SerializeField]
     private string bulletName;
     [SerializeField]
-    private string bulletCountUIName;
+    private GameObject bulletCountUI;
 
     private GameObject[] bulletCountUIs;
     private int remainingBullet;
@@ -37,26 +37,28 @@ public class PlayerFire : MonoBehaviour
         if (photonView.IsMine == true)
         {
             bulletPools = new GameObject[state.maxBulletCount * 2]; // 최대 장탄수의 2배를 미리 만든다.
-            bulletCountUIs = new GameObject[state.maxBulletCount];
 
             for (int i = 0; i < state.maxBulletCount * 2; ++i)
             {
                 bulletPools[i] = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
             }
 
-            float xPos = -0.45f;
-            float yPos = -0.3f;
-            for (int i = 0; i < state.maxBulletCount; ++i)
-            {
-                bulletCountUIs[i] = PhotonNetwork.Instantiate(bulletCountUIName, Vector3.zero, Quaternion.identity);
-                //bulletCountUIs[i].transform.SetParent(transform);
-                Debug.Log(transform);
-                bulletCountUIs[i].GetComponent<BulletCountUI>().Init(new Vector3(xPos, yPos, 0f), transform, true);
-                yPos += 0.15f;
-            }
 
-            Reload();
         }
+
+        bulletCountUIs = new GameObject[state.maxBulletCount];
+        // 처음 UI가 놓여질 X Y 좌표
+        float xPos = -0.45f;
+        float yPos = -0.3f;
+        for (int i = 0; i < state.maxBulletCount; ++i)
+        {
+            bulletCountUIs[i] = Instantiate(bulletCountUI);
+            bulletCountUIs[i].transform.parent = this.transform;
+            bulletCountUIs[i].transform.localPosition = new Vector3(xPos, yPos, 0f);
+            yPos += 0.15f;  // 각 UI간의 거리
+        }
+
+        remainingBullet = state.maxBulletCount;
     }
 
     void Reload()
@@ -64,7 +66,7 @@ public class PlayerFire : MonoBehaviour
         // UI 정렬하기
         for (int i = 0; i < state.maxBulletCount; ++i)
         {
-            bulletCountUIs[i].GetComponent<BulletCountUI>().ActiveSetting(true);
+            //bulletCountUIs[i].GetComponent<BulletCountUI>().ActiveSetting(true);
         }
 
         // 총알 다시 채우기
@@ -79,15 +81,6 @@ public class PlayerFire : MonoBehaviour
             GunPivotSetting();
 
             Fire();
-
-
-            //if(Input.GetMouseButtonDown(2))
-            //{
-            //    for(int i = 0; i < bulletCountUIs.Length; ++i)
-            //    {
-            //        bulletCountUIs[i].GetComponent<BulletCountUI>().SetParentTransform(transform);
-            //    }
-            //}
         }
     }
 
@@ -110,11 +103,10 @@ public class PlayerFire : MonoBehaviour
             selectBullet = GetBullet();
             if(selectBullet != null)
             {
-                //selectBullet.SetActive(true);
                 selectBullet.transform.position = firePos.position;
                 selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
 
-                bulletCountUIs[remainingBullet - 1].GetComponent<BulletCountUI>().ActiveSetting(false);
+                photonView.RPC("DisableBulletUI", RpcTarget.All, remainingBullet - 1);
                 --remainingBullet;
             }
         }
@@ -160,5 +152,11 @@ public class PlayerFire : MonoBehaviour
         }
 
         return null;
+    }
+
+    [PunRPC]
+    void DisableBulletUI(int idx)
+    {
+        bulletCountUIs[idx].SetActive(false);
     }
 }

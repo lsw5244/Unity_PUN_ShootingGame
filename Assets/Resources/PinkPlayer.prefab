@@ -446,4 +446,4 @@ MonoBehaviour:
   gunPivot: {fileID: 3068309941493205145}
   firePos: {fileID: 3068309942304593318}
   bulletName: Bullet
-  bulletCountUIName: BulletCountUI
+  bulletCountUI: {fileID: 563418430768413056, guid: 3f317b6845023ff46b9041e9142c5ded, type: 3}
