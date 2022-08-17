@@ -63,14 +63,18 @@ public class PlayerFire : MonoBehaviour
 
     void Reload()
     {
-        // UI 정렬하기
-        for (int i = 0; i < state.maxBulletCount; ++i)
-        {
-            //bulletCountUIs[i].GetComponent<BulletCountUI>().ActiveSetting(true);
-        }
+        // 기다리기 (장전 쿨타임)
 
         // 총알 다시 채우기
         remainingBullet = state.maxBulletCount;
+
+        // 장탄수 UI다시 활성화 시키기
+        for (int i = 0; i < state.maxBulletCount; ++i)
+        {
+            bulletCountUIs[i].SetActive(true);
+            photonView.RPC("EnableBulletUI", RpcTarget.All, i);
+        }
+
     }
 
     void Update()
@@ -81,6 +85,12 @@ public class PlayerFire : MonoBehaviour
             GunPivotSetting();
 
             Fire();
+
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                Reload();
+                Debug.Log("Reload!!!");
+            }
         }
     }
 
@@ -158,5 +168,11 @@ public class PlayerFire : MonoBehaviour
     void DisableBulletUI(int idx)
     {
         bulletCountUIs[idx].SetActive(false);
+    }
+
+    [PunRPC]
+    void EnableBulletUI(int idx)
+    {
+        bulletCountUIs[idx].SetActive(true);
     }
 }
