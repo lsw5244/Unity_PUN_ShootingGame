@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using Photon.Pun;
 
@@ -29,6 +30,9 @@ public class PlayerFire : MonoBehaviour
     private GameObject[] bulletCountUIs;
     private int remainingBullet;
 
+    [SerializeField]
+    private Image reloadTimeUI;
+
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -42,8 +46,6 @@ public class PlayerFire : MonoBehaviour
             {
                 bulletPools[i] = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
             }
-
-
         }
 
         bulletCountUIs = new GameObject[state.maxBulletCount];
@@ -59,32 +61,6 @@ public class PlayerFire : MonoBehaviour
         }
 
         remainingBullet = state.maxBulletCount;
-    }
-
-    IEnumerator ReloadCoroutine()
-    {
-        // 기다리기 (장전 쿨타임)
-        canFire = false;
-
-        yield return new WaitForSeconds(state.reloadTime);
-
-        // 총알 다시 채우기
-        remainingBullet = state.maxBulletCount;
-
-        // 장탄수 UI다시 활성화 시키기
-        for (int i = 0; i < state.maxBulletCount; ++i)
-        {
-            bulletCountUIs[i].SetActive(true);
-            photonView.RPC("EnableBulletUI", RpcTarget.All, i);
-        }
-
-        canFire = true;
-    }
-
-    [PunRPC]
-    void Reload()
-    {
-        StartCoroutine(ReloadCoroutine());
     }
 
     void Update()
@@ -173,6 +149,46 @@ public class PlayerFire : MonoBehaviour
         }
 
         return null;
+    }
+
+    [PunRPC]
+    void Reload()
+    {
+        StartCoroutine(ReloadCoroutine());
+    }
+
+    IEnumerator ReloadCoroutine()
+    {
+        canFire = false;
+
+        // 기다리기 (장전 쿨타임)
+        //yield return new WaitForSeconds(state.reloadTime);
+
+        float runTime = 0.0f;
+       
+        while (runTime < state.reloadTime)
+        {
+            runTime += Time.deltaTime;
+
+            reloadTimeUI.fillAmount = Mathf.Lerp(0, 1, runTime / state.reloadTime);
+
+            yield return null;
+        }
+
+        reloadTimeUI.fillAmount = 0f;
+
+
+        // 총알 다시 채우기
+        remainingBullet = state.maxBulletCount;
+
+        // 장탄수 UI다시 활성화 시키기
+        for (int i = 0; i < state.maxBulletCount; ++i)
+        {
+            bulletCountUIs[i].SetActive(true);
+            photonView.RPC("EnableBulletUI", RpcTarget.All, i);
+        }
+
+        canFire = true;
     }
 
     [PunRPC]
