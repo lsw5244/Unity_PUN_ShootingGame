@@ -13,4 +13,6 @@ public class PlayerState : MonoBehaviour
     public float attackDamage = 40f;
 
     public int maxBulletCount = 3;
+
+    public float reloadTime = 1.0f;
 }

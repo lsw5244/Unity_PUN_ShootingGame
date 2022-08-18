@@ -61,9 +61,12 @@ public class PlayerFire : MonoBehaviour
         remainingBullet = state.maxBulletCount;
     }
 
-    void Reload()
+    IEnumerator ReloadCoroutine()
     {
         // 기다리기 (장전 쿨타임)
+        canFire = false;
+
+        yield return new WaitForSeconds(state.reloadTime);
 
         // 총알 다시 채우기
         remainingBullet = state.maxBulletCount;
@@ -75,6 +78,13 @@ public class PlayerFire : MonoBehaviour
             photonView.RPC("EnableBulletUI", RpcTarget.All, i);
         }
 
+        canFire = true;
+    }
+
+    [PunRPC]
+    void Reload()
+    {
+        StartCoroutine(ReloadCoroutine());
     }
 
     void Update()
@@ -88,7 +98,8 @@ public class PlayerFire : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.R))
             {
-                Reload();
+                photonView.RPC("Reload", RpcTarget.All);
+                //Reload();
                 Debug.Log("Reload!!!");
             }
         }

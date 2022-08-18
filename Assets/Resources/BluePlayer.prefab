@@ -328,6 +328,7 @@ MonoBehaviour:
   bulletPower: 750
   attackDamage: 40
   maxBulletCount: 3
+  reloadTime: 1
 --- !u!114 &1296844145618780352
 MonoBehaviour:
   m_ObjectHideFlags: 0
