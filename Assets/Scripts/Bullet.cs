@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
     void LookVelocityDirection()
     {
         float dot = Vector2.Dot(transform.right, rigi.velocity);   // 좌- 우+
-        float angle = Mathf.Acos(dot / rigi.velocity.magnitude) * Mathf.Rad2Deg;    // 마우스 포인터와의 각도
+        float angle = Mathf.Acos(dot / rigi.velocity.magnitude) * Mathf.Rad2Deg;
 
         if (float.IsNaN(angle) == true)
         {
@@ -53,5 +53,11 @@ public class Bullet : MonoBehaviour
         {
             transform.rotation = transform.rotation * Quaternion.Euler(0f, 0f, -angle);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("@@@");
+        this.gameObject.SetActive(false);
     }
 }
