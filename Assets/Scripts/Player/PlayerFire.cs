@@ -72,11 +72,10 @@ public class PlayerFire : MonoBehaviour
 
             Fire();
 
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetKeyDown(KeyCode.R) && canFire == true)
             {
                 photonView.RPC("Reload", RpcTarget.All);
                 //Reload();
-                Debug.Log("Reload!!!");
             }
         }
     }
@@ -85,8 +84,14 @@ public class PlayerFire : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (canFire == false || remainingBullet <= 0)
+            if (canFire == false)
             {
+                return;
+            }
+
+            if(remainingBullet <= 0)
+            {
+                Reload();
                 return;
             }
 
@@ -163,9 +168,7 @@ public class PlayerFire : MonoBehaviour
 
         // 기다리기 (장전 쿨타임)
         //yield return new WaitForSeconds(state.reloadTime);
-
-        float runTime = 0.0f;
-       
+        float runTime = 0.0f;      
         while (runTime < state.reloadTime)
         {
             runTime += Time.deltaTime;
