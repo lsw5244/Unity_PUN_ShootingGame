@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rigi;
     private PhotonView photonView;
+    public GameObject shootPlayer;
 
     private void Awake()
     {
@@ -58,6 +59,9 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("@@@");
+
+
+        //ImpactAbilityManager.Instance.impactAbility();
         this.gameObject.SetActive(false);
     }
 }

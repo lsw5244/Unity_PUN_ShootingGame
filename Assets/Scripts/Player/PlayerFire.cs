@@ -45,6 +45,7 @@ public class PlayerFire : MonoBehaviour
             for (int i = 0; i < state.maxBulletCount * 2; ++i)
             {
                 bulletPools[i] = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
+                bulletPools[i].GetComponent<Bullet>().shootPlayer = this.gameObject;
             }
         }
 
