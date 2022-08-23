@@ -8,7 +8,7 @@ public class ImpactAbilityManager : MonoBehaviour
 {
     public static ImpactAbilityManager Instance;
 
-    public delegate void ImpactAbilityDelegate(GameObject Player, Vector3 pos);
+    public delegate void ImpactAbilityDelegate(GameObject Player, Vector3 BulletPos);
     public ImpactAbilityDelegate impactAbility;
 
     private PhotonView photonView;
@@ -39,6 +39,7 @@ public class ImpactAbilityManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F1))
         {
+            impactAbility -= BulletExplosion;
             impactAbility += BulletExplosion;
             Debug.Log("BulletExplosion 추가");
         }
@@ -49,15 +50,26 @@ public class ImpactAbilityManager : MonoBehaviour
         }
     }
 
-    void BulletExplosion(GameObject Player, Vector3 pos)
+    void BulletExplosion(GameObject Player, Vector3 BulletPos)
     {
-        photonView.RPC("RPCBulletExplosion", RpcTarget.All, Player, pos);
+        if(PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("마스터가 ImpactAbility를 발동시켰다 !!!");
+        }
+        else
+        {
+            Debug.Log("클라이언트가 ImpactAbility를 발동시켰다 !!!");
+        }
+
+        //photonView.RPC("RPCBulletExplosion", RpcTarget.All, Player, pos);
+        PhotonNetwork.Instantiate("TempBulletExplosion", BulletPos, Quaternion.identity);
     }
 
-    [PunRPC]
-    void RPCBulletExplosion(GameObject Player, Vector3 pos)
-    {
-        Instantiate(explosionEmpact, pos, Quaternion.identity);
-    }
+    //[PunRPC]
+    //void RPCBulletExplosion(GameObject Player, Vector3 pos)
+    //{
+    //    Debug.Log("@@@@@@");
+    //    //Instantiate(explosionEmpact, pos, Quaternion.identity);
+    //}
 
 }

@@ -58,10 +58,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("@@@");
+        if (ImpactAbilityManager.Instance.impactAbility != null && shootPlayer != null)
+        {
+            ImpactAbilityManager.Instance.impactAbility(shootPlayer, transform.position);
+        }
 
-
-        //ImpactAbilityManager.Instance.impactAbility();
+        
         this.gameObject.SetActive(false);
     }
 }
