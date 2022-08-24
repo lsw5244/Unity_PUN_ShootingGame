@@ -192,9 +192,9 @@ GameObject:
   - component: {fileID: 1296844145618780355}
   - component: {fileID: 1296844145618780352}
   - component: {fileID: 1296844145618780353}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BluePlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 1296844145618780383}
   - {fileID: 1296844145618780380}
+  - {fileID: 1296844145618780355}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
