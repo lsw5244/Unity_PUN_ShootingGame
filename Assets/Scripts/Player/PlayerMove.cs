@@ -64,7 +64,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Jump!!!");
             rigi.velocity = Vector2.zero;
             rigi.AddForce(Vector2.up * state.jumpPower);
         }

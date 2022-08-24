@@ -60,15 +60,14 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            if(photonView.IsMine == true)
+            // 만약 충돌한 물체가 나라면 == 현재는 내가 내 공격력만큼 데미지를 입는다 == 이러면 안됨 !
+            if(collision.gameObject.GetComponent<PlayerState>().photonView.IsMine == true)
             {
                 float dmg = collision.gameObject.GetComponent<PlayerState>().attackDamage;
                 Debug.Log($"총알의 데미지는 {dmg}");
                 collision.gameObject.GetComponent<PlayerState>().GetDamage(dmg);
-                //collision.gameObject.GetComponent<PlayerState>().attackDamage();
             }
         }
-
 
         if (ImpactAbilityManager.Instance.impactAbility != null && shootPlayer != null)
         {
