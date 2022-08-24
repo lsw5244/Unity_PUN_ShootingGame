@@ -203,7 +203,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267503969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148102843}
@@ -278,7 +278,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584339843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148102843}
@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a436503c89ab7e74e9dcc2526b3a4b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 100
   HP: 100
   moveSpeed: 7
   jumpPower: 400
@@ -482,6 +483,7 @@ MonoBehaviour:
   attackDamage: 10
   maxBulletCount: 3
   reloadTime: 1
+  hpBar: {fileID: 1267503971}
   photonView: {fileID: 0}
 --- !u!114 &1296844145618780352
 MonoBehaviour:
