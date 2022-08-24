@@ -18,21 +18,22 @@ public class PlayerState : MonoBehaviour, IPunObservable
 
     public float reloadTime = 1.0f;
 
-    private PhotonView photonView;
+    [HideInInspector]
+    public PhotonView photonView;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // 마스터가 다른사람에게 데이터 보내기
+            // 소유자가 다른사람에게 데이터 보내기
             stream.SendNext(HP);
-            Debug.Log($"마스터가 HP값을 보냈다 !!!, 보낸 HP값 {HP}");
+            Debug.Log($"{gameObject.name}에서의 Send {HP}");
         }
         else
         {
             // 클라이언트가 데이터 받기
-            HP = (float)stream.ReceiveNext();
-            Debug.Log($"마스터에게 Hp값을 받았다 !!!, 변화 한 수치{HP}");
+            this.HP = (float)stream.ReceiveNext();
+            Debug.Log($"{gameObject.name}에서의 Recive 받은 값 : {HP}");
         }
     }
 
@@ -41,26 +42,11 @@ public class PlayerState : MonoBehaviour, IPunObservable
         photonView = GetComponent<PhotonView>();
     }
 
-    [PunRPC]
-    void GetDamage(float Damage)
+    public void GetDamage(float Damage)
     {
-        HP -= Damage;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F3) && photonView.IsMine == true)
+        if (photonView.IsMine == true)
         {
-            if (PhotonNetwork.IsMasterClient == true)
-            {
-                Debug.Log($"{gameObject.name}의 GetDamage실행");
-                GetDamage(10f);
-            }
-            else
-            {
-                photonView.RPC("GetDamage", RpcTarget.MasterClient, 10f);
-                Debug.Log("내건데 마스터는 아닐 때(RPC로 마스터에게 호출 요청)");
-            }
+            HP -= Damage;
         }
     }
 }

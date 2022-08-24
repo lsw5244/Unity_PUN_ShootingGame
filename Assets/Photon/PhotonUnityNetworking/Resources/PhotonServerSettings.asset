@@ -55,6 +55,7 @@ MonoBehaviour:
   - EnableBulletUI
   - RPCBulletExplosion
   - GetDamage
+  - RPCGetDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

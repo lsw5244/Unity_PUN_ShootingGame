@@ -58,7 +58,11 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerState>().GetDamage(5f/*shootPlayer.gameObject.GetComponent<PlayerState>().attackDamage*/);
+        }
+
 
         if (ImpactAbilityManager.Instance.impactAbility != null && shootPlayer != null)
         {

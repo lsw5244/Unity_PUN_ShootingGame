@@ -330,6 +330,7 @@ MonoBehaviour:
   attackDamage: 40
   maxBulletCount: 3
   reloadTime: 1
+  photonView: {fileID: 0}
 --- !u!114 &1296844145618780352
 MonoBehaviour:
   m_ObjectHideFlags: 0
