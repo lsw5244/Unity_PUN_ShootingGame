@@ -44,7 +44,8 @@ public class PlayerState : MonoBehaviour, IPunObservable
 
     public void GetDamage(float Damage)
     {
-        if (photonView.IsMine == true)
+        Debug.Log($"{gameObject.name}의 GetDamage가 호출되었다 !!!");
+        //if (photonView.IsMine == true)
         {
             HP -= Damage;
         }

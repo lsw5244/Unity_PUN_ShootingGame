@@ -60,7 +60,13 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerState>().GetDamage(5f/*shootPlayer.gameObject.GetComponent<PlayerState>().attackDamage*/);
+            if(photonView.IsMine == true)
+            {
+                float dmg = collision.gameObject.GetComponent<PlayerState>().attackDamage;
+                Debug.Log($"총알의 데미지는 {dmg}");
+                collision.gameObject.GetComponent<PlayerState>().GetDamage(dmg);
+                //collision.gameObject.GetComponent<PlayerState>().attackDamage();
+            }
         }
 
 
