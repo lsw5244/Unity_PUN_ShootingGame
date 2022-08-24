@@ -38,6 +38,7 @@ public class PlayerState : MonoBehaviour, IPunObservable
         {
             // 클라이언트가 데이터 받기
             this.HP = (float)stream.ReceiveNext();
+            HpBarUpdate();
             Debug.Log($"{gameObject.name}에서의 Recive 받은 값 : {HP}");
         }
     }
@@ -51,7 +52,8 @@ public class PlayerState : MonoBehaviour, IPunObservable
     public void GetDamage(float Damage)
     {
         Debug.Log($"{gameObject.name}의 GetDamage가 호출되어 데미지를 주었다 !!!");
-        HP -= Damage;        
+        HP -= Damage;
+        HpBarUpdate();
     }
 
     void HpBarUpdate()
