@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 using Photon.Pun;
 
-public class PlayerState : MonoBehaviour, IPunObservable
+public class PlayerState : MonoBehaviour//, IPunObservable
 {
     public float maxHP = 100f;
     public float HP;
@@ -26,23 +26,6 @@ public class PlayerState : MonoBehaviour, IPunObservable
     [HideInInspector]
     public PhotonView photonView;
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            // 소유자가 다른사람에게 데이터 보내기
-            stream.SendNext(HP);
-            Debug.Log($"{gameObject.name}에서의 Send {HP}");
-        }
-        else
-        {
-            // 클라이언트가 데이터 받기
-            this.HP = (float)stream.ReceiveNext();
-            HpBarUpdate();
-            Debug.Log($"{gameObject.name}에서의 Recive 받은 값 : {HP}");
-        }
-    }
-
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -50,6 +33,12 @@ public class PlayerState : MonoBehaviour, IPunObservable
     }
 
     public void GetDamage(float Damage)
+    {
+        photonView.RPC("GetDamageRPC", RpcTarget.All, Damage);
+    }
+
+    [PunRPC]
+    void GetDamageRPC(float Damage)
     {
         Debug.Log($"{gameObject.name}의 GetDamage가 호출되어 데미지를 주었다 !!!");
         HP -= Damage;

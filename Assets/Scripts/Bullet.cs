@@ -60,11 +60,12 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            // 만약 충돌한 물체가 나라면 == 현재는 내가 내 공격력만큼 데미지를 입는다 == 이러면 안됨 !
-            if(collision.gameObject.GetComponent<PlayerState>().photonView.IsMine == true)
+            // 본인이 쏜 총알은 본인이 판단
+            if(photonView.IsMine == true)
             {
-                float dmg = collision.gameObject.GetComponent<PlayerState>().attackDamage;
-                Debug.Log($"총알의 데미지는 {dmg}");
+                // 총알 주인State
+                float dmg = shootPlayer.GetComponent<PlayerState>().attackDamage;
+                // 총알과 충돌한 플레이어의 State
                 collision.gameObject.GetComponent<PlayerState>().GetDamage(dmg);
             }
         }

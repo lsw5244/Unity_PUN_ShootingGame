@@ -426,7 +426,6 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 1296844145618780383}
   - {fileID: 1296844145618780380}
-  - {fileID: 1296844145618780355}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -480,7 +479,7 @@ MonoBehaviour:
   jumpPower: 400
   fireDelay: 0.2
   bulletPower: 750
-  attackDamage: 10
+  attackDamage: 50
   maxBulletCount: 3
   reloadTime: 1
   hpBar: {fileID: 1267503971}
