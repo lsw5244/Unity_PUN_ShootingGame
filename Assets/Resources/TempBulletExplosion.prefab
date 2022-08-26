@@ -119,5 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionTime: 1
-  explosionRange: 5
-  explosionDamage: 0
+  explosionRange: 1

@@ -8,17 +8,22 @@ public class BulletExplosion : MonoBehaviour
 {
     [SerializeField]
     private float explosionTime = 1.0f;
+    private float explosionDamage;
 
-    public float explosionRange = 5.0f;
-    public float explosionDamage;
-    
+    [SerializeField]
+    private float explosionRange = 1.0f;
 
-    void Explosion()
+    public void Explosion(float explosionDamage)
     {
-        if(PhotonNetwork.IsMasterClient == true)
-        {
+        this.explosionDamage = explosionDamage;
 
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, explosionRange, LayerMask.GetMask("Player"));
+        for (int i = 0; i < colls.Length; ++i)
+        {
+            colls[i].GetComponent<PlayerState>().GetDamage(explosionDamage);
         }
+
+        StartCoroutine(ExplosionCoroutine());
     }
 
     IEnumerator ExplosionCoroutine()

@@ -570,6 +570,7 @@ MonoBehaviour:
   fireDelay: 0.2
   bulletPower: 750
   attackDamage: 20
+  explosionDamage: 20
   maxBulletCount: 3
   reloadTime: 1
   hpBar: {fileID: 1626877154}

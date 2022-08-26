@@ -14,7 +14,9 @@ public class PlayerState : MonoBehaviour//, IPunObservable
 
     public float fireDelay = 0.2f;
     public float bulletPower = 100f;
+
     public float attackDamage = 40f;
+    public float explosionDamage = 20f;
 
     public int maxBulletCount = 3;
 
@@ -31,7 +33,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         photonView = GetComponent<PhotonView>();
         HP = maxHP;
     }
-
+    // 외부에서 RPC를 호출하도록 도와주는 헬퍼함수
     public void GetDamage(float Damage)
     {
         photonView.RPC("GetDamageRPC", RpcTarget.All, Damage);
@@ -40,7 +42,6 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     [PunRPC]
     void GetDamageRPC(float Damage)
     {
-        Debug.Log($"{gameObject.name}의 GetDamage가 호출되어 데미지를 주었다 !!!");
         HP -= Damage;
         HpBarUpdate();
     }

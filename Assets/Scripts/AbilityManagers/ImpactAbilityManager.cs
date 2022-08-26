@@ -13,9 +13,6 @@ public class ImpactAbilityManager : MonoBehaviour
 
     private PhotonView photonView;
 
-    [SerializeField]
-    private GameObject explosionEmpact;
-
     private void Awake()
     {
         if (Instance == null)
@@ -52,24 +49,9 @@ public class ImpactAbilityManager : MonoBehaviour
 
     void BulletExplosion(GameObject Player, Vector3 BulletPos)
     {
-        if(PhotonNetwork.IsMasterClient)
-        {
-            Debug.Log("마스터가 ImpactAbility를 발동시켰다 !!!");
-        }
-        else
-        {
-            Debug.Log("클라이언트가 ImpactAbility를 발동시켰다 !!!");
-        }
+        GameObject explosionEffect = PhotonNetwork.Instantiate("TempBulletExplosion", BulletPos, Quaternion.identity);
 
-        //photonView.RPC("RPCBulletExplosion", RpcTarget.All, Player, pos);
-        PhotonNetwork.Instantiate("TempBulletExplosion", BulletPos, Quaternion.identity);
+        float dmg = Player.GetComponent<PlayerState>().explosionDamage;
+        explosionEffect.GetComponent<BulletExplosion>().Explosion(dmg);
     }
-
-    //[PunRPC]
-    //void RPCBulletExplosion(GameObject Player, Vector3 pos)
-    //{
-    //    Debug.Log("@@@@@@");
-    //    //Instantiate(explosionEmpact, pos, Quaternion.identity);
-    //}
-
 }

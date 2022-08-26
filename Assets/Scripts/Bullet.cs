@@ -69,12 +69,12 @@ public class Bullet : MonoBehaviour
                 collision.gameObject.GetComponent<PlayerState>().GetDamage(dmg);
             }
         }
-
-        if (ImpactAbilityManager.Instance.impactAbility != null && shootPlayer != null)
+                
+        if (ImpactAbilityManager.Instance.impactAbility != null && /*photonView.IsMine == true*/ shootPlayer != null)
         {
             ImpactAbilityManager.Instance.impactAbility(shootPlayer, transform.position);
         }
-        
+
         this.gameObject.SetActive(false);
     }
 }
