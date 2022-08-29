@@ -52,6 +52,7 @@ public class ImpactAbilityManager : MonoBehaviour
         GameObject explosionEffect = PhotonNetwork.Instantiate("PaidAssets/BulletExplosion", BulletPos, Quaternion.identity);
 
         float dmg = Player.GetComponent<PlayerState>().explosionDamage;
-        explosionEffect.GetComponent<BulletExplosion>().Explosion(dmg);
+        float range = Player.GetComponent<PlayerState>().explosionRange;
+        explosionEffect.GetComponent<BulletExplosion>().Explosion(dmg, range);
     }
 }

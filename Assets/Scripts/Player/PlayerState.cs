@@ -16,7 +16,9 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     public float bulletPower = 100f;
 
     public float attackDamage = 40f;
+
     public float explosionDamage = 20f;
+    public float explosionRange = 1f;
 
     public int maxBulletCount = 3;
 

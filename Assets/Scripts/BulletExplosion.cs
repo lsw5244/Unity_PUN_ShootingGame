@@ -8,15 +8,9 @@ public class BulletExplosion : MonoBehaviour
 {
     [SerializeField]
     private float explosionTime = 1.0f;
-    private float explosionDamage;
 
-    [SerializeField]
-    private float explosionRange = 1.0f;
-
-    public void Explosion(float explosionDamage)
+    public void Explosion(float explosionDamage, float explosionRange)
     {
-        this.explosionDamage = explosionDamage;
-
         Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, explosionRange, LayerMask.GetMask("Player"));
         for (int i = 0; i < colls.Length; ++i)
         {
