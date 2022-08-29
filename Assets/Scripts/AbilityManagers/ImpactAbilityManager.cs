@@ -49,7 +49,7 @@ public class ImpactAbilityManager : MonoBehaviour
 
     void BulletExplosion(GameObject Player, Vector3 BulletPos)
     {
-        GameObject explosionEffect = PhotonNetwork.Instantiate("TempBulletExplosion", BulletPos, Quaternion.identity);
+        GameObject explosionEffect = PhotonNetwork.Instantiate("PaidAssets/BulletExplosion", BulletPos, Quaternion.identity);
 
         float dmg = Player.GetComponent<PlayerState>().explosionDamage;
         explosionEffect.GetComponent<BulletExplosion>().Explosion(dmg);
