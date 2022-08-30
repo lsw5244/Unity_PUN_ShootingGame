@@ -434,6 +434,7 @@ GameObject:
   - component: {fileID: 3068309942534854404}
   - component: {fileID: 3068309942534854407}
   - component: {fileID: 3068309942534854406}
+  - component: {fileID: 8005030242170963801}
   m_Layer: 3
   m_Name: PinkPlayer
   m_TagString: Player
@@ -571,6 +572,7 @@ MonoBehaviour:
   bulletPower: 750
   attackDamage: 20
   explosionDamage: 20
+  explosionRange: 1
   maxBulletCount: 3
   reloadTime: 1
   hpBar: {fileID: 1626877154}
@@ -604,6 +606,18 @@ MonoBehaviour:
   bulletName: Bullet
   bulletCountUI: {fileID: 563418430768413056, guid: 3f317b6845023ff46b9041e9142c5ded, type: 3}
   reloadTimeUI: {fileID: 4611635811419192900}
+--- !u!114 &8005030242170963801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068309942534854431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a52b3cac5957f428513ce762cc6586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3238441536054339328
 GameObject:
   m_ObjectHideFlags: 0
