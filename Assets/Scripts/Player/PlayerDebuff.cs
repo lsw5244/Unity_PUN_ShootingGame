@@ -34,8 +34,7 @@ public class PlayerDebuff : MonoBehaviour
 
     IEnumerator Poison(float PoisionDamage)
     {
-        isPoisonState = true;
-        photonView.RPC("ChangeColor", RpcTarget.All, 0f, 255f, 0f);
+        photonView.RPC("ChangePoisonState", RpcTarget.All, 0f, 255f, 0f, true);
 
         while (damageCount > 0)
         {            
@@ -50,13 +49,14 @@ public class PlayerDebuff : MonoBehaviour
             yield return new WaitForSeconds(poisonDamageDelay);
         }
 
-        photonView.RPC("ChangeColor", RpcTarget.All, 255f, 255f, 255f);
-        isPoisonState = false;
+        photonView.RPC("ChangePoisonState", RpcTarget.All, 255f, 255f, 255f, false);
     }
 
     [PunRPC]
-    void ChangeColor(float R, float G, float B)
+    void ChangePoisonState(float SpriteColorR, float SpriteColorG, float SpriteColorB, bool isPoisonState)
     {
-        spriteRenderer.color = new Color(R, G, B);
+        spriteRenderer.color = new Color(SpriteColorR, SpriteColorG, SpriteColorB);
+
+        this.isPoisonState = isPoisonState;
     }
 }
