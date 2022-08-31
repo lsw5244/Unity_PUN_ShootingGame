@@ -39,6 +39,11 @@ public class HitAbilityManager : MonoBehaviour
             hitAbility -= PoisonBullet;
             hitAbility += PoisonBullet;
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            hitAbility -= PoisonBullet;
+        }
     }
 
     void PoisonBullet(GameObject ShootPlayer, GameObject HitPlayer)

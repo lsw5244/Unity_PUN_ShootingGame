@@ -483,6 +483,8 @@ MonoBehaviour:
   attackDamage: 50
   explosionDamage: 20
   explosionRange: 1
+  poisonDamage: 10
+  poisonCount: 3
   maxBulletCount: 3
   reloadTime: 1
   hpBar: {fileID: 1267503971}

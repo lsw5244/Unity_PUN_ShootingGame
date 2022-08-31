@@ -13,7 +13,7 @@ public class PlayerDebuff : MonoBehaviour
     private int damageCount;
     private bool isPoisonState = false;
 
-    private float poisonDamageDelay = 0.2f;
+    private float poisonDamageDelay = 0.5f;
 
     void Start()
     {
@@ -22,82 +22,41 @@ public class PlayerDebuff : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
     
-    // 때린 객체가 독 데미지랑 카운트 줌
+    // 총알을 쐇던 객체가 해당 함수를 실행시킨다.
     public void StartPoison(float PoisonDamage, int DamageCount)
     {
         this.damageCount = DamageCount;
         if(isPoisonState == false)
         {
-            // 코루틴 시작
+            StartCoroutine("Poison", PoisonDamage);
         }
-    }
-
-    [PunRPC]
-    void StartPoisonRPC(float PoisonDamage, int DamageCount)
-    {
-        
     }
 
     IEnumerator Poison(float PoisionDamage)
     {
         isPoisonState = true;
-        spriteRenderer.color = new Color(0f, 255f, 0f);
+        photonView.RPC("ChangeColor", RpcTarget.All, 0f, 255f, 0f);
 
         while (damageCount > 0)
-        {
-            if(playerState.HP <= 0)
-            {
-                break;
-            }
-
+        {            
             playerState.GetDamage(PoisionDamage);
 
-            yield return new WaitForSeconds(poisonDamageDelay);
             damageCount--;
+
+            if (playerState.HP <= 0)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(poisonDamageDelay);
         }
 
-        spriteRenderer.color = new Color(255f, 255f, 255f);
+        photonView.RPC("ChangeColor", RpcTarget.All, 255f, 255f, 255f);
         isPoisonState = false;
     }
-    /*
-    public void StartPoisonEffect(float damage)
+
+    [PunRPC]
+    void ChangeColor(float R, float G, float B)
     {
-        poisonDamageCount = 5;
-
-        if (_isPoisonState == false)
-        {
-            StartCoroutine(Poison(damage));
-        }
+        spriteRenderer.color = new Color(R, G, B);
     }
-
-    protected IEnumerator Poison(float damage)
-    {
-        _poisonParicle.SetActive(true);
-        _isPoisonState = true;
-
-        while (poisonDamageCount > 0)
-        {
-            if( _isAlive == false )
-            {
-                break;
-            }
-
-            currentHp -= damage;
-            UIManager.Instance.UpdateMonsterHpbar(currentHp / _maxHP, gameObject.name);
-
-            if (currentHp <= 0f && _isAlive == true)
-            {
-                Die();
-                break;
-            }
-
-            yield return new WaitForSeconds(poisonDamageDelay);     // 0.5초에 한 번씩 실행되도록
-
-            poisonDamageCount--;
-        }
-
-        _isPoisonState = false;
-        _poisonParicle.SetActive(false);
-    }
-     */
 }
