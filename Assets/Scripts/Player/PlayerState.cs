@@ -20,6 +20,9 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     public float explosionDamage = 20f;
     public float explosionRange = 1f;
 
+    public float poisonDamage = 10f;
+    public int poisonCount = 3;
+
     public int maxBulletCount = 3;
 
     public float reloadTime = 1.0f;

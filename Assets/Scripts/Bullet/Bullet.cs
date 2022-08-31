@@ -67,6 +67,11 @@ public class Bullet : MonoBehaviour
                 float dmg = shootPlayer.GetComponent<PlayerState>().attackDamage;
                 // 총알과 충돌한 플레이어의 State
                 collision.gameObject.GetComponent<PlayerState>().GetDamage(dmg);
+                // hit특성 발동
+                if(HitAbilityManager.Instance.hitAbility != null)
+                {
+                    HitAbilityManager.Instance.hitAbility(shootPlayer, collision.gameObject);
+                }
             }
         }
                 

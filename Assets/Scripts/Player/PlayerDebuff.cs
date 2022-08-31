@@ -22,13 +22,20 @@ public class PlayerDebuff : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
     
-    public void StartPoisionEffect(float PoisionDamage, int DamageCount)
+    // 때린 객체가 독 데미지랑 카운트 줌
+    public void StartPoison(float PoisonDamage, int DamageCount)
     {
         this.damageCount = DamageCount;
         if(isPoisonState == false)
         {
             // 코루틴 시작
         }
+    }
+
+    [PunRPC]
+    void StartPoisonRPC(float PoisonDamage, int DamageCount)
+    {
+        
     }
 
     IEnumerator Poison(float PoisionDamage)
