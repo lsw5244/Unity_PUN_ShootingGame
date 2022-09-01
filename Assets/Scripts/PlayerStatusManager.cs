@@ -6,26 +6,25 @@ public class PlayerStatusManager : MonoBehaviour
 {
     public static PlayerStatusManager Instance;
 
-    public float maxHP = 100f;
+    public float MaxHP { get; set; } = 100f;
 
-    public float moveSpeed = 10f;
-    public float jumpPower = 10f;
+    public float MoveSpeed { get; set; } = 7f;
+    public float JumpPower { get; set; } = 400f;
 
-    public float fireDelay = 0.2f;
-    public float bulletPower = 100f;
+    public float FireDelay { get; set; } = 0.2f;
+    public float BulletPower { get; set; } = 750f;
 
-    public float attackDamage = 40f;
+    public float AttackDamage { get; set; } = 40f;
 
-    public float explosionDamage = 20f;
-    public float explosionRange = 1f;
+    public float ExplosionDamage { get; set; } = 20f;
+    public float ExplosionRange { get; set; } = 1f;
 
-    public float poisonDamage = 10f;
-    public int poisonCount = 3;
+    public float PoisonDamage { get; set; } = 10f;
+    public int PoisonCount { get; set; } = 3;
 
-    public int maxBulletCount = 3;
+    public int MaxBulletCount { get; set; } = 3;
 
-    public float reloadTime = 1.0f;
-
+    public float ReloadTime { get; set; } = 1.0f;
 
     private void Awake()
     {

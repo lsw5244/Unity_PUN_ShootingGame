@@ -7,25 +7,25 @@ using Photon.Pun;
 
 public class PlayerState : MonoBehaviour//, IPunObservable
 {
-    public float maxHP = 100f;
+    public float maxHP;
     public float HP;
-    public float moveSpeed = 10f;
-    public float jumpPower = 10f;
+    public float moveSpeed;
+    public float jumpPower;
 
-    public float fireDelay = 0.2f;
-    public float bulletPower = 100f;
+    public float fireDelay;
+    public float bulletPower;
 
-    public float attackDamage = 40f;
+    public float attackDamage;
 
-    public float explosionDamage = 20f;
-    public float explosionRange = 1f;
+    public float explosionDamage;
+    public float explosionRange;
 
-    public float poisonDamage = 10f;
-    public int poisonCount = 3;
+    public float poisonDamage;
+    public int poisonCount;
 
-    public int maxBulletCount = 3;
+    public int maxBulletCount;
 
-    public float reloadTime = 1.0f;
+    public float reloadTime;
 
     [SerializeField]
     private Image hpBar;
@@ -36,8 +36,35 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
-        HP = maxHP;
+        if(photonView.IsMine == true)
+        {
+            StatusInit();
+        }
     }
+
+    void StatusInit()
+    {
+        maxHP = PlayerStatusManager.Instance.MaxHP;
+        HP = maxHP;
+        moveSpeed = PlayerStatusManager.Instance.MoveSpeed;
+        jumpPower = PlayerStatusManager.Instance.JumpPower;
+
+        fireDelay = PlayerStatusManager.Instance.FireDelay;
+        bulletPower = PlayerStatusManager.Instance.BulletPower;
+
+        attackDamage = PlayerStatusManager.Instance.AttackDamage;
+
+        explosionDamage = PlayerStatusManager.Instance.ExplosionDamage;
+        explosionRange = PlayerStatusManager.Instance.ExplosionRange;
+
+        poisonDamage = PlayerStatusManager.Instance.PoisonDamage;
+        poisonCount = PlayerStatusManager.Instance.PoisonCount;
+
+        maxBulletCount = PlayerStatusManager.Instance.MaxBulletCount;
+
+        reloadTime = PlayerStatusManager.Instance.ReloadTime;
+    }
+
     // 외부에서 RPC를 호출하도록 도와주는 헬퍼함수
     public void GetDamage(float Damage)
     {
