@@ -11,8 +11,10 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     public static GameScoreManager Instance { get { return _instance; } }
 
     PhotonView photonView;
-
+    
+    [SerializeField]
     private int leftPlayerScore = 0;
+    [SerializeField]
     private int rightPlayerScore = 0;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -53,10 +55,12 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     public void LeftPlayerScoreUP()
     {
         leftPlayerScore++;
+        Debug.Log("LeftPlayer의 점수가 올랏다 !");
     }
 
     public void RightPlayerScoreUp()
     {
         rightPlayerScore++;
+        Debug.Log("RightPlayer의 점수가 올랏다 !");
     }
 }

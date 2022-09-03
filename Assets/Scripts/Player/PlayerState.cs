@@ -76,6 +76,21 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     {
         HP -= Damage;
         HpBarUpdate();
+
+        if(PhotonNetwork.IsMasterClient == true)
+        {
+            if (HP <= 0)
+            {
+                if(photonView.IsMine == true)
+                {
+                    GameScoreManager.Instance.LeftPlayerScoreUP();
+                }
+                else
+                {
+                    GameScoreManager.Instance.RightPlayerScoreUp();
+                }
+            }
+        }
     }
 
     void HpBarUpdate()
