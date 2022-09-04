@@ -83,11 +83,11 @@ public class PlayerState : MonoBehaviour//, IPunObservable
             {
                 if(photonView.IsMine == true)
                 {
-                    GameScoreManager.Instance.LeftPlayerScoreUP();
+                    GameScoreManager.Instance.RightPlayerScoreUp();
                 }
                 else
                 {
-                    GameScoreManager.Instance.RightPlayerScoreUp();
+                    GameScoreManager.Instance.LeftPlayerScoreUP();
                 }
             }
         }
