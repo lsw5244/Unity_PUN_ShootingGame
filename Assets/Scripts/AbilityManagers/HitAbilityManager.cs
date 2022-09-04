@@ -34,20 +34,22 @@ public class HitAbilityManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             hitAbility -= PoisonBullet;
             hitAbility += PoisonBullet;
+            Debug.Log("Æø¹ß ÃÑ¾Ë Ãß°¡");
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             hitAbility -= PoisonBullet;
+            Debug.Log("Æø¹ß ÃÑ¾Ë Á¦°Å");
         }
     }
 
     void PoisonBullet(GameObject ShootPlayer, GameObject HitPlayer)
-    {
+    {        
         float poisonDamage = ShootPlayer.GetComponent<PlayerState>().poisonDamage;
         int poisonCount = ShootPlayer.GetComponent<PlayerState>().poisonCount;
 

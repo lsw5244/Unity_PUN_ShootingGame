@@ -17,6 +17,8 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     [SerializeField]
     private int rightPlayerScore = 0;
 
+    private bool playRound = true;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -54,13 +56,26 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
 
     public void LeftPlayerScoreUP()
     {
-        leftPlayerScore++;
-        Debug.Log("LeftPlayer의 점수가 올랏다 !");
+        if(playRound == true)
+        {
+            leftPlayerScore++;
+            Debug.Log("LeftPlayer의 점수가 올랏다 !");
+            playRound = false;
+        }
     }
 
     public void RightPlayerScoreUp()
     {
-        rightPlayerScore++;
-        Debug.Log("RightPlayer의 점수가 올랏다 !");
+        if (playRound == true)
+        {
+            rightPlayerScore++;
+            Debug.Log("RightPlayer의 점수가 올랏다 !");
+            playRound = false;
+        }
+    }
+
+    public void StartRound()
+    {
+        playRound = true;
     }
 }
