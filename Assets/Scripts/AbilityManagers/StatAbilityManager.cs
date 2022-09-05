@@ -35,14 +35,14 @@ public class StatAbilityManager : MonoBehaviour
 
     public void Combine()
     {
-        //PlayerStatusManager.Instance.AttackDamage *= 3;
+        PlayerStatusManager.Instance.AttackDamage *= 3;
 
-        //PlayerStatusManager.Instance.MaxBulletCount -= 2;
-        //if(PlayerStatusManager.Instance.MaxBulletCount <= 0)
-        //{
-        //    PlayerStatusManager.Instance.MaxBulletCount = 1;
-        //}
+        PlayerStatusManager.Instance.MaxBulletCount -= 2;
+        if (PlayerStatusManager.Instance.MaxBulletCount <= 0)
+        {
+            PlayerStatusManager.Instance.MaxBulletCount = 1;
+        }
 
-        //PlayerStatusManager.Instance.FireDelay += 0.3f;
+        PlayerStatusManager.Instance.FireDelay += 0.3f;
     }
 }
