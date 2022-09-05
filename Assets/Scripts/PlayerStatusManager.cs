@@ -6,31 +6,32 @@ public class PlayerStatusManager : MonoBehaviour
 {
     public static PlayerStatusManager Instance;
 
-    public float MaxHP { get; set; } = 100f;
+    public float MaxHP { get; set; }
 
-    public float MoveSpeed { get; set; } = 7f;
-    public float JumpPower { get; set; } = 400f;
+    public float MoveSpeed { get; set; }
+    public float JumpPower { get; set; }
 
-    public float FireDelay { get; set; } = 0.2f;
-    public float BulletPower { get; set; } = 750f;
+    public float FireDelay { get; set; }
+    public float BulletPower { get; set; }
 
-    public float AttackDamage { get; set; } = 40f;
+    public float AttackDamage { get; set; }
 
-    public float ExplosionDamage { get; set; } = 20f;
-    public float ExplosionRange { get; set; } = 1f;
+    public float ExplosionDamage { get; set; }
+    public float ExplosionRange { get; set; }
 
-    public float PoisonDamage { get; set; } = 10f;
-    public int PoisonCount { get; set; } = 3;
+    public float PoisonDamage { get; set; }
+    public int PoisonCount { get; set; }
 
-    public int MaxBulletCount { get; set; } = 3;
+    public int MaxBulletCount { get; set; }
 
-    public float ReloadTime { get; set; } = 1.0f;
+    public float ReloadTime { get; set; }
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            InitBasicStat();
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -38,5 +39,28 @@ public class PlayerStatusManager : MonoBehaviour
             Debug.LogWarning($"PlayerStatusManager 여러개가 감지되어 {gameObject.name}를 삭제합니다.");
             Destroy(gameObject);
         }
+    }
+
+    void InitBasicStat()
+    {
+        MaxHP = 100f;
+
+        MoveSpeed = 7f;
+        JumpPower = 400f;
+                
+        FireDelay = 0.2f;
+        BulletPower = 750f;
+
+        AttackDamage = 40f;
+
+        ExplosionDamage = 20f;
+        ExplosionRange = 1f;
+
+        PoisonDamage = 10f;
+        PoisonCount = 3;
+
+        MaxBulletCount = 3;
+
+        ReloadTime  = 1.0f;
     }
 }

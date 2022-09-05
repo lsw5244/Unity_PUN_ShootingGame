@@ -33,7 +33,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     [HideInInspector]
     public PhotonView photonView;
 
-    private void Start()
+    private void Awake()
     {
         photonView = GetComponent<PhotonView>();
         if(photonView.IsMine == true)
@@ -63,6 +63,8 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         maxBulletCount = PlayerStatusManager.Instance.MaxBulletCount;
 
         reloadTime = PlayerStatusManager.Instance.ReloadTime;
+
+        Debug.Log($"내 플래이어 스텟 Init MaxBulletcount : {maxBulletCount}");
     }
 
     // 외부에서 RPC를 호출하도록 도와주는 헬퍼함수

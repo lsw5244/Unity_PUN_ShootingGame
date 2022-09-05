@@ -184,7 +184,6 @@ public class PlayerFire : MonoBehaviour
 
         // 총알 다시 채우기
         remainingBullet = state.maxBulletCount;
-
         // 장탄수 UI다시 활성화 시키기
         for (int i = 0; i < state.maxBulletCount; ++i)
         {
@@ -204,6 +203,12 @@ public class PlayerFire : MonoBehaviour
     [PunRPC]
     void EnableBulletUI(int idx)
     {
+        Debug.Log($"{idx}번째 장탄수 UI 활성화 할 예정");
+
+        if(photonView.IsMine == true)
+        {
+            return;
+        }
         bulletCountUIs[idx].SetActive(true);
     }
 }
