@@ -83,6 +83,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
             {
                 if(photonView.IsMine == true)
                 {
+                    // 마스터가 죽었을 때
                     GameScoreManager.Instance.RightPlayerScoreUp();
                 }
                 else

@@ -34,10 +34,9 @@ public class PlayerDebuff : MonoBehaviour
 
     IEnumerator Poison(float PoisionDamage)
     {
-        photonView.RPC("ChangePoisonState", RpcTarget.All, 0f, 255f, 0f, true);
-
         while (damageCount > 0)
         {            
+            photonView.RPC("ChangePoisonState", RpcTarget.All, 0f, 255f, 0f, true);
             playerState.GetDamage(PoisionDamage);
 
             damageCount--;
