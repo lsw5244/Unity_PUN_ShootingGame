@@ -40,6 +40,9 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         if (Instance == null)
         {
             _instance = this;
+
+            photonView = gameObject.AddComponent<PhotonView>();
+
             DontDestroyOnLoad(this);
         }
         else
@@ -51,7 +54,7 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
 
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        //photonView = GetComponent<PhotonView>();
     }
 
     public void LeftPlayerScoreUP()

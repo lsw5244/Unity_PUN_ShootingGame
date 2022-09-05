@@ -18,6 +18,9 @@ public class HitAbilityManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+
+            photonView = gameObject.AddComponent<PhotonView>();
+
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -29,7 +32,6 @@ public class HitAbilityManager : MonoBehaviour
 
     private void Start()
     {
-        photonView = GetComponent<PhotonView>();
     }
 
     private void Update()

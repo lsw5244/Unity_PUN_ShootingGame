@@ -18,6 +18,9 @@ public class ImpactAbilityManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+
+            photonView = gameObject.AddComponent<PhotonView>();
+
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -29,7 +32,7 @@ public class ImpactAbilityManager : MonoBehaviour
 
     private void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        //photonView = GetComponent<PhotonView>();
     }
 
     private void Update()
