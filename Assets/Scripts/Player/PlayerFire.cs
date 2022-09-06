@@ -38,6 +38,7 @@ public class PlayerFire : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         state = GetComponent<PlayerState>();
 
+        bulletCountUIs = new GameObject[state.maxBulletCount];
         if (photonView.IsMine == true)
         {
             bulletPools = new GameObject[state.maxBulletCount * 2]; // 최대 장탄수의 2배를 미리 만든다.
@@ -47,21 +48,26 @@ public class PlayerFire : MonoBehaviour
                 bulletPools[i] = PhotonNetwork.Instantiate(bulletName, firePos.position, gunPivot.transform.rotation);
                 bulletPools[i].GetComponent<Bullet>().shootPlayer = this.gameObject;
             }
-        }
 
-        bulletCountUIs = new GameObject[state.maxBulletCount];
-        // 처음 UI가 놓여질 X Y 좌표
-        float xPos = -0.45f;
-        float yPos = -0.3f;
-        for (int i = 0; i < state.maxBulletCount; ++i)
-        {
-            bulletCountUIs[i] = Instantiate(bulletCountUI);
-            bulletCountUIs[i].transform.parent = this.transform;
-            bulletCountUIs[i].transform.localPosition = new Vector3(xPos, yPos, 0f);
-            yPos += 0.15f;  // 각 UI간의 거리
+            // 처음 UI가 놓여질 X Y 좌표
+            float xPos = -0.45f;
+            float yPos = -0.3f;
+            for (int i = 0; i < state.maxBulletCount; ++i)
+            {
+                bulletCountUIs[i] = PhotonNetwork.Instantiate("BulletCountUI", Vector3.zero, Quaternion.identity);
+                bulletCountUIs[i].GetComponent<BulletCountUI>().SetParent(photonView.ViewID);
+                bulletCountUIs[i].transform.localPosition = new Vector3(xPos, yPos, 0f);
+                yPos += 0.15f;  // 각 UI간의 거리
+            }
         }
 
         currentBulletCount = state.maxBulletCount;
+    }
+
+    [PunRPC]
+    void T(GameObject g)
+    {
+        g.transform.parent = this.gameObject.transform;
     }
 
     void Update()

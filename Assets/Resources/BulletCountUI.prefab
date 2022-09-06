@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8726441347637280113}
   - component: {fileID: -2554738393870911309}
   - component: {fileID: -2256900451175578942}
+  - component: {fileID: -6503361355413975944}
   m_Layer: 0
   m_Name: BulletCountUI
   m_TagString: Untagged
@@ -123,3 +124,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &-6503361355413975944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563418430768413056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91dd4705c0fa1e44a8fddc7ec712f85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}

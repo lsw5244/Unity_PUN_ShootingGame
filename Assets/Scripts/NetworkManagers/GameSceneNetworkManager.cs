@@ -15,6 +15,7 @@ public class GameSceneNetworkManager : MonoBehaviour
     private string lPlayerPrefabName;
     [SerializeField]
     private string rPlayerPrefabName;
+       
 
     private void Awake()
     {
