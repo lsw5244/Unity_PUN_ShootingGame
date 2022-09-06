@@ -28,7 +28,7 @@ public class PlayerFire : MonoBehaviour
     private GameObject bulletCountUI;
 
     private GameObject[] bulletCountUIs;
-    private int remainingBullet;
+    private int currentBulletCount;
 
     [SerializeField]
     private Image reloadTimeUI;
@@ -61,7 +61,7 @@ public class PlayerFire : MonoBehaviour
             yPos += 0.15f;  // 각 UI간의 거리
         }
 
-        remainingBullet = state.maxBulletCount;
+        currentBulletCount = state.maxBulletCount;
     }
 
     void Update()
@@ -90,7 +90,7 @@ public class PlayerFire : MonoBehaviour
                 return;
             }
 
-            if(remainingBullet <= 0)
+            if(currentBulletCount <= 0)
             {
                 Reload();
                 return;
@@ -109,8 +109,8 @@ public class PlayerFire : MonoBehaviour
                 selectBullet.transform.position = firePos.position;
                 selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
 
-                photonView.RPC("DisableBulletUI", RpcTarget.All, remainingBullet - 1);
-                --remainingBullet;
+                photonView.RPC("DisableBulletUI", RpcTarget.All, currentBulletCount - 1);
+                --currentBulletCount;
             }
         }
     }
@@ -181,14 +181,17 @@ public class PlayerFire : MonoBehaviour
 
         reloadTimeUI.fillAmount = 0f;
 
-
         // 총알 다시 채우기
-        remainingBullet = state.maxBulletCount;
-        // 장탄수 UI다시 활성화 시키기
-        for (int i = 0; i < state.maxBulletCount; ++i)
+        currentBulletCount = state.maxBulletCount;
+
+        if(photonView.IsMine == true)
         {
-            bulletCountUIs[i].SetActive(true);
-            photonView.RPC("EnableBulletUI", RpcTarget.All, i);
+            // 장탄수 UI다시 활성화 시키기
+            for (int i = 0; i < state.maxBulletCount; ++i)
+            {
+                bulletCountUIs[i].SetActive(true);
+                photonView.RPC("EnableBulletUI", RpcTarget.All, i);
+            }
         }
 
         canFire = true;
@@ -203,12 +206,10 @@ public class PlayerFire : MonoBehaviour
     [PunRPC]
     void EnableBulletUI(int idx)
     {
-        Debug.Log($"{idx}번째 장탄수 UI 활성화 할 예정");
-
-        if(photonView.IsMine == true)
-        {
-            return;
-        }
+        //if(photonView.IsMine == true)
+        //{
+        //    return;
+        //}
         bulletCountUIs[idx].SetActive(true);
     }
 }
