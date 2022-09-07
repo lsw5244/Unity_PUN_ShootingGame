@@ -30,7 +30,9 @@ public class StatAbilityManager : MonoBehaviour
 
     public void GlassCannon()
     {
-        //PlayerStatusManager.Instance.AttackDamage *= 2;
+        PlayerStatusManager.Instance.AttackDamage *= 2;
+        PlayerStatusManager.Instance.MaxHP /= 2;
+        PlayerStatusManager.Instance.ReloadTime += 0.25f;
     }
 
     public void Combine()
