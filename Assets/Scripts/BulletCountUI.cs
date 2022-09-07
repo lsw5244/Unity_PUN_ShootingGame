@@ -12,23 +12,6 @@ public class BulletCountUI : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
 
-    private void Update()
-    {
-        if(PhotonNetwork.IsMasterClient)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                photonView.RPC("SetActiveRPC", RpcTarget.All, true);
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightControl))
-            {
-                photonView.RPC("SetActiveRPC", RpcTarget.All, false);
-            }
-        }
-        
-    }
-
     public void SetParent(int ParentViewID)
     {
         photonView.RPC("SetParentRPC", RpcTarget.All, ParentViewID);        
@@ -49,10 +32,5 @@ public class BulletCountUI : MonoBehaviour
     void SetActiveRPC(bool active)
     {
         this.gameObject.SetActive(active);
-    }
-
-    public void AAA(bool a)
-    {
-        Debug.Log("AAA가 호출되었다 !!!");
     }
 }
