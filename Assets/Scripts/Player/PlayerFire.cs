@@ -64,12 +64,6 @@ public class PlayerFire : MonoBehaviour
         currentBulletCount = state.maxBulletCount;
     }
 
-    [PunRPC]
-    void T(GameObject g)
-    {
-        g.transform.parent = this.gameObject.transform;
-    }
-
     void Update()
     {
         if (photonView.IsMine == true)
@@ -82,7 +76,6 @@ public class PlayerFire : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.R) && canFire == true)
             {
                 photonView.RPC("Reload", RpcTarget.All);
-                //Reload();
             }
         }
     }
@@ -115,7 +108,7 @@ public class PlayerFire : MonoBehaviour
                 selectBullet.transform.position = firePos.position;
                 selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
 
-                photonView.RPC("DisableBulletUI", RpcTarget.All, currentBulletCount - 1);
+                bulletCountUIs[currentBulletCount - 1].GetComponent<BulletCountUI>().SetActive(false);
                 --currentBulletCount;
             }
         }
@@ -195,27 +188,10 @@ public class PlayerFire : MonoBehaviour
             // 장탄수 UI다시 활성화 시키기
             for (int i = 0; i < state.maxBulletCount; ++i)
             {
-                bulletCountUIs[i].SetActive(true);
-                photonView.RPC("EnableBulletUI", RpcTarget.All, i);
+                bulletCountUIs[i].GetComponent<BulletCountUI>().SetActive(true);
             }
         }
 
         canFire = true;
-    }
-
-    [PunRPC]
-    void DisableBulletUI(int idx)
-    {
-        bulletCountUIs[idx].SetActive(false);
-    }
-
-    [PunRPC]
-    void EnableBulletUI(int idx)
-    {
-        //if(photonView.IsMine == true)
-        //{
-        //    return;
-        //}
-        bulletCountUIs[idx].SetActive(true);
     }
 }
