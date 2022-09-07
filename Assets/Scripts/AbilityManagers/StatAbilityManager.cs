@@ -43,7 +43,7 @@ public class StatAbilityManager : MonoBehaviour
             PlayerStatusManager.Instance.MaxBulletCount = 1;
         }
 
-        PlayerStatusManager.Instance.FireDelay += 0.3f;
+        PlayerStatusManager.Instance.ReloadTime += 0.3f;
         
     }
 }
