@@ -51,7 +51,7 @@ public class PlayerStatusManager : MonoBehaviour
         FireDelay = 0.2f;
         BulletPower = 750f;
 
-        AttackDamage = 40f;
+        AttackDamage = 50f;
 
         ExplosionDamage = 20f;
         ExplosionRange = 1f;

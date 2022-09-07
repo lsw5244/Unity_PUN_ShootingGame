@@ -30,12 +30,12 @@ public class StatAbilityManager : MonoBehaviour
 
     public void GlassCannon()
     {
-
+        //PlayerStatusManager.Instance.AttackDamage *= 2;
     }
 
     public void Combine()
     {
-        PlayerStatusManager.Instance.AttackDamage *= 3;
+        PlayerStatusManager.Instance.AttackDamage *= 2;
 
         PlayerStatusManager.Instance.MaxBulletCount -= 2;
         if (PlayerStatusManager.Instance.MaxBulletCount <= 0)
@@ -43,7 +43,7 @@ public class StatAbilityManager : MonoBehaviour
             PlayerStatusManager.Instance.MaxBulletCount = 1;
         }
 
-        PlayerStatusManager.Instance.ReloadTime += 0.3f;
+        PlayerStatusManager.Instance.ReloadTime += 0.5f;
         
     }
 }
