@@ -40,14 +40,26 @@ public class HitAbilityManager : MonoBehaviour
         {
             hitAbility -= PoisonBullet;
             hitAbility += PoisonBullet;
-            Debug.Log("폭발 총알 추가");
+            Debug.Log("독 총알 추가");
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             hitAbility -= PoisonBullet;
-            Debug.Log("폭발 총알 제거");
+            Debug.Log("독 총알 제거");
         }
+    }
+
+    public void AddPoisonBullet()
+    {
+        if(PlayerStatusManager.Instance.PoisonDamage <= 0)
+        {
+            hitAbility -= PoisonBullet;
+            hitAbility += PoisonBullet;
+            PlayerStatusManager.Instance.PoisonCount = 3;
+        }
+        // 틱당 중독 데미지가 10씩 증가하도록 구현
+        PlayerStatusManager.Instance.PoisonDamage += 10f;
     }
 
     void PoisonBullet(GameObject ShootPlayer, GameObject HitPlayer)

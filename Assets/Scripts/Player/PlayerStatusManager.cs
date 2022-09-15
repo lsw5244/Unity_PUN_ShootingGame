@@ -56,8 +56,8 @@ public class PlayerStatusManager : MonoBehaviour
         ExplosionDamage = 0f;//20f;
         ExplosionRange = 0f; //1f;
 
-        PoisonDamage = 10f;
-        PoisonCount = 3;
+        PoisonDamage = 0f;//10f;
+        PoisonCount = 0;// 3;
 
         MaxBulletCount = 3;
 

@@ -62,6 +62,7 @@ public class AbilityAdder : MonoBehaviour
     public void AddPoisonBullet()
     {
         Debug.Log("1. AddPoisonBullet ½ÇÇà !!!");
+        HitAbilityManager.Instance.AddPoisonBullet();
     }
 
     public void AddGlassCannon()
