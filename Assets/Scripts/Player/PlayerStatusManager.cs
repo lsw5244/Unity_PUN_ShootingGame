@@ -53,8 +53,8 @@ public class PlayerStatusManager : MonoBehaviour
 
         AttackDamage = 50f;
 
-        ExplosionDamage = 20f;
-        ExplosionRange = 1f;
+        ExplosionDamage = 0f;//20f;
+        ExplosionRange = 0f; //1f;
 
         PoisonDamage = 10f;
         PoisonCount = 3;

@@ -50,6 +50,18 @@ public class ImpactAbilityManager : MonoBehaviour
         }
     }
 
+    public void AddBulletExplosion()
+    {
+        if(PlayerStatusManager.Instance.ExplosionDamage <= 0f)
+        {
+            impactAbility -= BulletExplosion;
+            impactAbility += BulletExplosion;
+        }
+
+        PlayerStatusManager.Instance.ExplosionDamage = 20f;
+        PlayerStatusManager.Instance.ExplosionRange = 1f;
+    }
+
     void BulletExplosion(GameObject Player, Vector3 BulletPos)
     {
         GameObject explosionEffect = PhotonNetwork.Instantiate("PaidAssets/BulletExplosion", BulletPos, Quaternion.identity);

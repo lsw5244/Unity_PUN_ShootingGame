@@ -27,7 +27,7 @@ public class AbilityAdder : MonoBehaviour
             Debug.Log(type);
             MethodInfo mi = type.GetMethod("AddBulletExplosion", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            mi.Invoke(this, null);
+            //mi.Invoke(this, null);
         }
     }     
 
@@ -55,21 +55,22 @@ public class AbilityAdder : MonoBehaviour
     /* ===========아래에는 특성 추가 함수=========== */
     void AddBulletExplosion()
     {
-        Debug.Log("AddBulletExplosion 실행 !!!");
+        Debug.Log("0. AddBulletExplosion 실행 !!!");
+        ImpactAbilityManager.Instance.AddBulletExplosion();
     }
 
     public void AddPoisonBullet()
     {
-        Debug.Log("AddPoisonBullet 실행 !!!");
+        Debug.Log("1. AddPoisonBullet 실행 !!!");
     }
 
     public void AddGlassCannon()
     {
-        Debug.Log("AddGlassCannon 실행 !!!");
+        Debug.Log("2. AddGlassCannon 실행 !!!");
     }
 
     public void AddCombine()
     {
-        Debug.Log("AddCombine 실행 !!!");
+        Debug.Log("3. AddCombine 실행 !!!");
     }
 }
