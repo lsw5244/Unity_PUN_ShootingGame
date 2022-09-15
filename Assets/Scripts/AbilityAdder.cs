@@ -15,19 +15,44 @@ public class AbilityAdder : MonoBehaviour
 
     private void Start()
     {
-        /* 해야할 것 중복없이 숫자 3개 뽑기 */        
+        /* 중복없이 숫자 3개 뽑기 */        
         ChooseAbilityIdxs();
+
+        // 리플렉션을 통해 런타임 중 문자열로 함수 실행시키기
+        type = this.GetType();
+        MethodInfo mi = type.GetMethod("AddBulletExplosion", BindingFlags.NonPublic | BindingFlags.Instance);
+
+        //mi.Invoke(this, null);
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            type = this.GetType();
-            Debug.Log(type);
-            MethodInfo mi = type.GetMethod("AddBulletExplosion", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            //mi.Invoke(this, null);
+            Debug.Log(type);
+
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            MethodInfo mi = type.GetMethod(addAbilityNames[0], BindingFlags.NonPublic | BindingFlags.Instance);
+            mi.Invoke(this, null);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            MethodInfo mi = type.GetMethod(addAbilityNames[1], BindingFlags.NonPublic | BindingFlags.Instance);
+            mi.Invoke(this, null);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            MethodInfo mi = type.GetMethod(addAbilityNames[2], BindingFlags.NonPublic | BindingFlags.Instance);
+            mi.Invoke(this, null);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            MethodInfo mi = type.GetMethod(addAbilityNames[3], BindingFlags.NonPublic | BindingFlags.Instance);
+            mi.Invoke(this, null);
         }
     }     
 
@@ -59,19 +84,21 @@ public class AbilityAdder : MonoBehaviour
         ImpactAbilityManager.Instance.AddBulletExplosion();
     }
 
-    public void AddPoisonBullet()
+    void AddPoisonBullet()
     {
         Debug.Log("1. AddPoisonBullet 실행 !!!");
         HitAbilityManager.Instance.AddPoisonBullet();
     }
 
-    public void AddGlassCannon()
+    void AddGlassCannon()
     {
         Debug.Log("2. AddGlassCannon 실행 !!!");
+        StatAbilityManager.Instance.GlassCannon();
     }
 
-    public void AddCombine()
+    void AddCombine()
     {
         Debug.Log("3. AddCombine 실행 !!!");
+        StatAbilityManager.Instance.Combine();
     }
 }

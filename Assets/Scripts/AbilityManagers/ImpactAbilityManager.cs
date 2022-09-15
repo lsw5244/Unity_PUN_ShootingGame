@@ -30,26 +30,6 @@ public class ImpactAbilityManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        //photonView = GetComponent<PhotonView>();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F1))
-        {
-            impactAbility -= BulletExplosion;
-            impactAbility += BulletExplosion;
-            Debug.Log("BulletExplosion 추가");
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            impactAbility -= BulletExplosion;
-            Debug.Log("BulletExplosion 해제");
-        }
-    }
-
     public void AddBulletExplosion()
     {
         if(PlayerStatusManager.Instance.ExplosionDamage <= 0f)

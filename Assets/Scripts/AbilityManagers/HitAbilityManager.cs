@@ -30,26 +30,6 @@ public class HitAbilityManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            hitAbility -= PoisonBullet;
-            hitAbility += PoisonBullet;
-            Debug.Log("µ¶ ÃÑ¾Ë Ãß°¡");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            hitAbility -= PoisonBullet;
-            Debug.Log("µ¶ ÃÑ¾Ë Á¦°Å");
-        }
-    }
-
     public void AddPoisonBullet()
     {
         if(PlayerStatusManager.Instance.PoisonDamage <= 0)
