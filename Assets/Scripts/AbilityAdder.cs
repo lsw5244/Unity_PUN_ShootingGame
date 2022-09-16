@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Reflection;
+using Photon.Pun;
 
 public class AbilityAdder : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class AbilityAdder : MonoBehaviour
         = { "AddBulletExplosion", "AddPoisonBullet", "AddGlassCannon", "AddCombine"  };
 
     private int[] selectAbilityIdxs = new int[3];
+    private int currentSelectAbilityIdx = 0;
 
     private System.Type type;
 
@@ -27,7 +29,30 @@ public class AbilityAdder : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        //if(PhotonNetwork.IsMasterClient == true)
+        {
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                //currentSelectAbilityIdx--;
+                currentSelectAbilityIdx = Mathf.Max(0, --currentSelectAbilityIdx);
+
+                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                currentSelectAbilityIdx = Mathf.Min(2, ++currentSelectAbilityIdx);
+                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
 
             Debug.Log(type);
