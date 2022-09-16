@@ -29,7 +29,7 @@ public class AbilityAdder : MonoBehaviour
 
     private void Update()
     {
-        //if(PhotonNetwork.IsMasterClient == true)
+        if(PhotonNetwork.IsMasterClient == true)
         {
             if(Input.GetKeyDown(KeyCode.A))
             {
@@ -47,7 +47,8 @@ public class AbilityAdder : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-
+                MethodInfo mi = type.GetMethod(addAbilityNames[selectAbilityIdxs[currentSelectAbilityIdx]], BindingFlags.NonPublic | BindingFlags.Instance);
+                mi.Invoke(this, null);
             }
         }
 
