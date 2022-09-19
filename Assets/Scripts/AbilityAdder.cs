@@ -26,6 +26,8 @@ public class AbilityAdder : MonoBehaviour
     private Image[] abilityImages = new Image[3];
     [SerializeField]
     private Text[] abilityNameTexts = new Text[3];
+    [SerializeField]
+    private Text[] abilityInfoTexts = new Text[3];
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class AbilityAdder : MonoBehaviour
         {
             abilityImages[i].sprite = abilityImagesResources[randomAbilityIdxs[i]];
             abilityNameTexts[i].text = addAbilityNames[randomAbilityIdxs[i]].Replace("Add", "");
+            abilityInfoTexts[i].text = abilityInfos[randomAbilityIdxs[i]];
         }
     }
 

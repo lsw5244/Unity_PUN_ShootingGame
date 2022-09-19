@@ -450,6 +450,10 @@ MonoBehaviour:
   - {fileID: 1881044696}
   - {fileID: 1774980135}
   - {fileID: 1554898642}
+  abilityInfoTexts:
+  - {fileID: 1491888852}
+  - {fileID: 1689320490}
+  - {fileID: 200219723}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
