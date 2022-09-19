@@ -10,6 +10,10 @@ public class AbilityAdder : MonoBehaviour
 {
     private string[] addAbilityNames
         = { "AddBulletExplosion", "AddPoisonBullet", "AddGlassCannon", "AddCombine"  };
+
+    private string[] abilityInfos
+        = { "총알이 충격을 받으면 폭발합니다.", "총알에 독 데미지가 추가됩니다."
+            , "데미지 X 2\nHp / 2\n재장전 시간 + 0.25s", "데미지 X2\n최대 장탄수 - 2\n재장전 시간 + 0.5s" };
     [SerializeField]
     private Sprite[] abilityImagesResources;
 
