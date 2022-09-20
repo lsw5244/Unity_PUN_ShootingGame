@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
-
 using Photon.Pun;
 
 public class RoundManager : MonoBehaviour
@@ -15,7 +14,6 @@ public class RoundManager : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(PhotonNetwork.IsMasterClient == true)

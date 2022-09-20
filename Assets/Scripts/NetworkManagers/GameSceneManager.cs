@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Photon.Pun;
 
-public class GameSceneNetworkManager : MonoBehaviour
+public class GameSceneManager : MonoBehaviour
 {
     [SerializeField]
     private Transform lSpawnPos;
@@ -15,7 +15,9 @@ public class GameSceneNetworkManager : MonoBehaviour
     private string lPlayerPrefabName;
     [SerializeField]
     private string rPlayerPrefabName;
-       
+
+    [SerializeField]
+    private GameObject abilitySelectCanvas;
 
     private void Awake()
     {
@@ -27,5 +29,10 @@ public class GameSceneNetworkManager : MonoBehaviour
         {
             PhotonNetwork.Instantiate(rPlayerPrefabName, rSpawnPos.position, Quaternion.identity);
         }
+    }
+
+    void GameEnd()
+    {
+        abilitySelectCanvas.SetActive(true);
     }
 }
