@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using Photon.Pun;
 
 public class GameSceneManager : MonoBehaviour
 {
     private PhotonView photonView;
-
+    
     [SerializeField]
     private Transform lSpawnPos;
     [SerializeField]
@@ -21,45 +22,62 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject abilitySelectCanvas;
 
-    private GameObject myPlayer;
+    [SerializeField]
+    private Image winnerImage;
+    [SerializeField]
+    private Sprite bluePlayerSprite;
+    [SerializeField]
+    private Sprite pinkPlayerSprite;
 
     private void Awake()
     {
         if(PhotonNetwork.IsMasterClient == true)
         {
-            myPlayer = PhotonNetwork.Instantiate(lPlayerPrefabName, lSpawnPos.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(lPlayerPrefabName, lSpawnPos.position, Quaternion.identity);
         }
         else
         {
-            myPlayer = PhotonNetwork.Instantiate(rPlayerPrefabName, rSpawnPos.position, Quaternion.identity);            
+            PhotonNetwork.Instantiate(rPlayerPrefabName, rSpawnPos.position, Quaternion.identity);            
         }
 
         photonView = GetComponent<PhotonView>();
     }
 
-
-    public void EndGame(bool leftPlayerWin)
+    public void EndGame(bool bluePlayerWin)
     {
         /*
             1. 스코어 증가
             2. 어빌리티 선택 판넬 활성화
          */
 
-        if(leftPlayerWin == true)
+        PlayerType t = PlayerType.Blue;
+
+        if (bluePlayerWin == true)
         {
-            GameScoreManager.Instance.LeftPlayerScoreUP();
+            GameScoreManager.Instance.BluePlayerScoreUP();
+            Debug.Log("Blue플레이어가 승리하여 점수가 올랐다 !!!");
         }
         else
         {
-            GameScoreManager.Instance.RightPlayerScoreUp();
+            GameScoreManager.Instance.PinkPlayerScoreUp();
+            Debug.Log("Pink플레이어가 승리하여 점수가 올랐다 !!!");
         }
 
-        photonView.RPC("AbilitySelectCanvasSetActiveRPC", RpcTarget.All, true);
+        photonView.RPC("AbilitySelectCanvasSettingRPC", RpcTarget.All, true, bluePlayerWin);
     }
 
     [PunRPC]
-    void AbilitySelectCanvasSetActiveRPC(bool active)
+    void AbilitySelectCanvasSettingRPC(bool canvasActive, bool bluePlayerWin = true)
     {
         abilitySelectCanvas.SetActive(true);
+
+        if(bluePlayerWin == true)
+        {
+            winnerImage.sprite = bluePlayerSprite;
+        }
+        else
+        {
+            winnerImage.sprite = pinkPlayerSprite;
+        }
     }
 }

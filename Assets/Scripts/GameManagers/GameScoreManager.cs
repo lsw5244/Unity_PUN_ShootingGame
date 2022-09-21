@@ -57,7 +57,7 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         //photonView = GetComponent<PhotonView>();
     }
 
-    public void LeftPlayerScoreUP()
+    public void BluePlayerScoreUP()
     {
         if(playRound == true)
         {
@@ -67,7 +67,7 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         }
     }
 
-    public void RightPlayerScoreUp()
+    public void PinkPlayerScoreUp()
     {
         if (playRound == true)
         {

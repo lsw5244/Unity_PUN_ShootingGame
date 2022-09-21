@@ -67,6 +67,7 @@ MonoBehaviour:
   - DieRPC
   - AbilitySelectCanvasSetActive
   - AbilitySelectCanvasSetActiveRPC
+  - AbilitySelectCanvasSettingRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

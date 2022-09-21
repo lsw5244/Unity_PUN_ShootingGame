@@ -1,0 +1,4 @@
+enum PlayerType
+{
+    Blue, Pink
+}
