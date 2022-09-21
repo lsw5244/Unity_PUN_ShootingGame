@@ -1,4 +1,4 @@
-enum PlayerType
+public enum PlayerType
 {
     Blue, Pink
 }

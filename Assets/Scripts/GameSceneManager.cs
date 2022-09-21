@@ -43,27 +43,25 @@ public class GameSceneManager : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
 
-    public void EndGame(bool bluePlayerWin)
+    public void EndGame(PlayerType winner)
     {
         /*
             1. 스코어 증가
             2. 어빌리티 선택 판넬 활성화
          */
-
-        PlayerType t = PlayerType.Blue;
-
-        if (bluePlayerWin == true)
+        
+        if(winner == PlayerType.Blue)
         {
             GameScoreManager.Instance.BluePlayerScoreUP();
             Debug.Log("Blue플레이어가 승리하여 점수가 올랐다 !!!");
+            photonView.RPC("AbilitySelectCanvasSettingRPC", RpcTarget.All, true, true);
         }
         else
         {
             GameScoreManager.Instance.PinkPlayerScoreUp();
             Debug.Log("Pink플레이어가 승리하여 점수가 올랐다 !!!");
+            photonView.RPC("AbilitySelectCanvasSettingRPC", RpcTarget.All, true, false);
         }
-
-        photonView.RPC("AbilitySelectCanvasSettingRPC", RpcTarget.All, true, bluePlayerWin);
     }
 
     [PunRPC]
