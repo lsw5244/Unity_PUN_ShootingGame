@@ -47,25 +47,25 @@ public class AbilityAdder : MonoBehaviour
     {
         if(PhotonNetwork.IsMasterClient == true)
         {
-            if(Input.GetKeyDown(KeyCode.A))
-            {
-                //currentSelectAbilityIdx--;
-                currentSelectAbilityIdx = Mathf.Max(0, --currentSelectAbilityIdx);
+            //if(Input.GetKeyDown(KeyCode.A))
+            //{
+            //    //currentSelectAbilityIdx--;
+            //    currentSelectAbilityIdx = Mathf.Max(0, --currentSelectAbilityIdx);
 
-                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
-            }
+            //    Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
+            //}
 
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                currentSelectAbilityIdx = Mathf.Min(2, ++currentSelectAbilityIdx);
-                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
-            }
+            //if (Input.GetKeyDown(KeyCode.D))
+            //{
+            //    currentSelectAbilityIdx = Mathf.Min(2, ++currentSelectAbilityIdx);
+            //    Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
+            //}
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                MethodInfo mi = type.GetMethod(addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]], BindingFlags.NonPublic | BindingFlags.Instance);
-                mi.Invoke(this, null);
-            }
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    MethodInfo mi = type.GetMethod(addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]], BindingFlags.NonPublic | BindingFlags.Instance);
+            //    mi.Invoke(this, null);
+            //}
         }
     }     
 

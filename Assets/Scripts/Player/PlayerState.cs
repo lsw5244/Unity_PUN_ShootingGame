@@ -33,6 +33,8 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     [HideInInspector]
     public PhotonView photonView;
 
+    private GameSceneManager gameSceneManager;
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -40,6 +42,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         {
             StatusInit();
         }
+        gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }
 
     void StatusInit()
@@ -83,7 +86,6 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         {
             if (HP <= 0)
             {
-                Debug.Log($"{this.gameObject.name}이 사망하였습니다 !!!");
                 Die();
             }
         }
@@ -94,12 +96,12 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         if (photonView.IsMine == true)
         {
             // 마스터가 죽었을 때 처리
-            GameScoreManager.Instance.RightPlayerScoreUp();            
+            gameSceneManager.EndGame(true);
         }
         else
         {
             // 클라가 죽었을 때 처리
-            GameScoreManager.Instance.LeftPlayerScoreUP();
+            gameSceneManager.EndGame(false);
         }
     }
 
