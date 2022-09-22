@@ -28,6 +28,8 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
     private Text[] abilityNameTexts = new Text[3];
     [SerializeField]
     private Text[] abilityInfoTexts = new Text[3];
+    [SerializeField]
+    private Image[] abilityCardOutLine = new Image[3];
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
