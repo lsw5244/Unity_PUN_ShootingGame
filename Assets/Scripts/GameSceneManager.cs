@@ -29,6 +29,9 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField]
     private Sprite pinkPlayerSprite;
 
+    [SerializeField]
+    private AbilityAdder abilityAdder;
+
     private void Awake()
     {
         if(PhotonNetwork.IsMasterClient == true)

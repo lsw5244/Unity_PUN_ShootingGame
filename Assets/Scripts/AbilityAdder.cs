@@ -31,6 +31,8 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
     [SerializeField]
     private Image[] abilityCardOutLine = new Image[3];
 
+    private PhotonView photonView;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -52,38 +54,44 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         if (PhotonNetwork.IsMasterClient == true)
         {
             ChooseAbilityIdxs();
             AbilityUiSetting();
         }
+
+        photonView = GetComponent<PhotonView>();
+        photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, true);
     }
-     
+
     private void Update()
     {
         if(PhotonNetwork.IsMasterClient == true)
         {
-            //if(Input.GetKeyDown(KeyCode.A))
-            //{
-            //    //currentSelectAbilityIdx--;
-            //    currentSelectAbilityIdx = Mathf.Max(0, --currentSelectAbilityIdx);
+            if (Input.GetKeyDown(KeyCode.Keypad4))
+            {
+                photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, false);
+                currentSelectAbilityIdx = Mathf.Max(0, --currentSelectAbilityIdx);
+                photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, true);
 
-            //    Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
-            //}
+                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
+            }
 
-            //if (Input.GetKeyDown(KeyCode.D))
-            //{
-            //    currentSelectAbilityIdx = Mathf.Min(2, ++currentSelectAbilityIdx);
-            //    Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
-            //}
+            if (Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, false);
+                currentSelectAbilityIdx = Mathf.Min(2, ++currentSelectAbilityIdx);
+                photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, true);
+                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
+            }
 
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    MethodInfo mi = type.GetMethod(addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]], BindingFlags.NonPublic | BindingFlags.Instance);
-            //    mi.Invoke(this, null);
-            //}
+            if (Input.GetKeyDown(KeyCode.Keypad5))
+            {
+                MethodInfo mi = type.GetMethod(addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]], BindingFlags.NonPublic | BindingFlags.Instance);
+                mi.Invoke(this, null);
+            }
         }
     }     
 
@@ -117,6 +125,12 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
             abilityNameTexts[i].text = addAbilityNames[randomAbilityIdxs[i]].Replace("Add", "");
             abilityInfoTexts[i].text = abilityInfos[randomAbilityIdxs[i]];
         }
+    }
+
+    [PunRPC]
+    void CardOutLineActive(int outLineidx, bool active)
+    {
+        abilityCardOutLine[outLineidx].gameObject.SetActive(active);
     }
 
     /* ===========아래에는 특성 추가 함수=========== */
