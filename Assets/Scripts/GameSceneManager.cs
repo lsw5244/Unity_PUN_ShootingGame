@@ -48,7 +48,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void EndGame(PlayerType winner)
     {
-        /*
+         /*
             1. 스코어 증가
             2. 어빌리티 선택 판넬 활성화
          */
@@ -71,6 +71,8 @@ public class GameSceneManager : MonoBehaviour
     void AbilitySelectCanvasSettingRPC(bool canvasActive, bool bluePlayerWin = true)
     {
         abilitySelectCanvas.SetActive(true);
+
+        abilityAdder.gameEnd = true;
 
         if(bluePlayerWin == true)
         {

@@ -87,16 +87,6 @@ public class PlayerState : MonoBehaviour//, IPunObservable
             if (HP <= 0)
             {
                 Die();
-                //if (photonView.IsMine == true)
-                //{
-                //    // 마스터가 죽었을 때 처리
-                //    gameSceneManager.EndGame(PlayerType.Pink);
-                //}
-                //else
-                //{
-                //    // 클라가 죽었을 때 처리
-                //    gameSceneManager.EndGame(PlayerType.Blue);
-                //}
             }
         }
     }

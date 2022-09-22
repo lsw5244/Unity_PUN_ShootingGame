@@ -33,6 +33,8 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
 
     private PhotonView photonView;
 
+    public bool gameEnd = false;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -68,9 +70,9 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-        if(PhotonNetwork.IsMasterClient == true)
+        if(PhotonNetwork.IsMasterClient == true && gameEnd == true)
         {
-            if (Input.GetKeyDown(KeyCode.Keypad4))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, false);
                 currentSelectAbilityIdx = Mathf.Max(0, --currentSelectAbilityIdx);
@@ -79,7 +81,7 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
                 Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad6))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, false);
                 currentSelectAbilityIdx = Mathf.Min(2, ++currentSelectAbilityIdx);
@@ -87,7 +89,7 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
                 Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad5))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 MethodInfo mi = type.GetMethod(addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]], BindingFlags.NonPublic | BindingFlags.Instance);
                 mi.Invoke(this, null);
