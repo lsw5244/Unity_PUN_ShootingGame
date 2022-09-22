@@ -91,7 +91,12 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                MethodInfo mi = type.GetMethod(addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]], BindingFlags.NonPublic | BindingFlags.Instance);
+                string a = addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]];
+                Debug.Log($"{a}를 추가하려 했음"); // 하려던건 나옴
+
+                MethodInfo mi = type.GetMethod(a, BindingFlags.NonPublic | BindingFlags.Instance);
+                Debug.Log($"mi에는 {mi}가 있습니다.");
+
                 mi.Invoke(this, null);
             }
         }
