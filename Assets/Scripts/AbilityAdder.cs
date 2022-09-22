@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Reflection;
 using Photon.Pun;
 
-public class AbilityAdder : MonoBehaviour
+public class AbilityAdder : MonoBehaviour, IPunObservable
 {
     private string[] addAbilityNames
         = { "AddBulletExplosion", "AddPoisonBullet", "AddGlassCannon", "AddCombine"  };
@@ -29,20 +29,36 @@ public class AbilityAdder : MonoBehaviour
     [SerializeField]
     private Text[] abilityInfoTexts = new Text[3];
 
-    private void Start()
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        // 마스터가 정하고 분배시키기
-        /* 중복없이 숫자 3개 뽑기 */
-        ChooseAbilityIdxs();
-
-        for (int i = 0; i < randomAbilityIdxs.Length; ++i)
+        if (stream.IsWriting)
         {
-            abilityImages[i].sprite = abilityImagesResources[randomAbilityIdxs[i]];
-            abilityNameTexts[i].text = addAbilityNames[randomAbilityIdxs[i]].Replace("Add", "");
-            abilityInfoTexts[i].text = abilityInfos[randomAbilityIdxs[i]];
+            // 소유자가 다른사람에게 데이터 보내기
+            for (int i = 0; i < randomAbilityIdxs.Length; ++i)
+            {
+                stream.SendNext(randomAbilityIdxs[i]);
+            }
+        }
+        else
+        {
+            // 다른 클라이언트가 데이터 받기
+            for (int i = 0; i < randomAbilityIdxs.Length; ++i)
+            {
+                this.randomAbilityIdxs[i] = (int)stream.ReceiveNext();
+            }
+            AbilityUiSetting();
         }
     }
 
+    private void Awake()
+    {
+        if (PhotonNetwork.IsMasterClient == true)
+        {
+            ChooseAbilityIdxs();
+            AbilityUiSetting();
+        }
+    }
+     
     private void Update()
     {
         if(PhotonNetwork.IsMasterClient == true)
@@ -90,6 +106,17 @@ public class AbilityAdder : MonoBehaviour
             Debug.Log($"{i}번째 숫자는 {randomAbilityIdxs[i]}");
         }
     }
+
+    void AbilityUiSetting()
+    {
+        for (int i = 0; i < randomAbilityIdxs.Length; ++i)
+        {
+            abilityImages[i].sprite = abilityImagesResources[randomAbilityIdxs[i]];
+            abilityNameTexts[i].text = addAbilityNames[randomAbilityIdxs[i]].Replace("Add", "");
+            abilityInfoTexts[i].text = abilityInfos[randomAbilityIdxs[i]];
+        }
+    }
+
     /* ===========아래에는 특성 추가 함수=========== */
     void AddBulletExplosion()
     {
