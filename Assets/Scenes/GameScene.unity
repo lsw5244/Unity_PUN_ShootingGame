@@ -2313,7 +2313,7 @@ MonoBehaviour:
   lPlayerPrefabName: BluePlayer
   rPlayerPrefabName: PinkPlayer
   abilitySelectCanvas: {fileID: 1826327170}
-  winnerImage: {fileID: 1357986665}
+  loserPlayerImage: {fileID: 1357986665}
   bluePlayerSprite: {fileID: 21300000, guid: c137c5dcadea38a4da73e75ba1f72daa, type: 3}
   pinkPlayerSprite: {fileID: 21300000, guid: 14440fa2471ca0b4486632fa0617ac40, type: 3}
   abilityAdder: {fileID: 2100694837}
@@ -3075,6 +3075,8 @@ MonoBehaviour:
   - {fileID: 1968704248}
   - {fileID: 746112501}
   - {fileID: 1569650945}
+  gameEnd: 0
+  winnerPlayer: 0
 --- !u!114 &2100694838
 MonoBehaviour:
   m_ObjectHideFlags: 0

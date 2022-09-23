@@ -33,7 +33,11 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
 
     private PhotonView photonView;
 
+    [HideInInspector]
     public bool gameEnd = false;
+    private PlayerType myPlayerType;
+    [HideInInspector]
+    public PlayerType winnerPlayer;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -62,6 +66,11 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
         {
             ChooseAbilityIdxs();
             AbilityUiSetting();
+            myPlayerType = PlayerType.Blue;
+        }
+        else
+        {
+            myPlayerType = PlayerType.Pink;
         }
 
         photonView = GetComponent<PhotonView>();
@@ -70,7 +79,7 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-        if(PhotonNetwork.IsMasterClient == true && gameEnd == true)
+        if(myPlayerType != winnerPlayer && gameEnd == true)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {

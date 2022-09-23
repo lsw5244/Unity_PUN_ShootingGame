@@ -23,7 +23,7 @@ public class GameSceneManager : MonoBehaviour
     private GameObject abilitySelectCanvas;
 
     [SerializeField]
-    private Image winnerImage;
+    private Image loserPlayerImage;
     [SerializeField]
     private Sprite bluePlayerSprite;
     [SerializeField]
@@ -76,11 +76,13 @@ public class GameSceneManager : MonoBehaviour
 
         if(bluePlayerWin == true)
         {
-            winnerImage.sprite = bluePlayerSprite;
+            loserPlayerImage.sprite = pinkPlayerSprite;
+            abilityAdder.winnerPlayer = PlayerType.Blue;
         }
         else
         {
-            winnerImage.sprite = pinkPlayerSprite;
+            loserPlayerImage.sprite = bluePlayerSprite;
+            abilityAdder.winnerPlayer = PlayerType.Pink;
         }
     }
 }
