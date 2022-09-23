@@ -46,6 +46,12 @@ public class GameSceneManager : MonoBehaviour
         photonView = GetComponent<PhotonView>();
     }
 
+    private void Start()
+    {
+        GameScoreManager.Instance.StartRound();
+
+    }
+
     public void EndGame(PlayerType winner)
     {
          /*
