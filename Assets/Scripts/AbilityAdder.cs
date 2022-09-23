@@ -77,26 +77,20 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
                 photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, false);
                 currentSelectAbilityIdx = Mathf.Max(0, --currentSelectAbilityIdx);
                 photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, true);
-
-                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
             }
 
             if (Input.GetKeyDown(KeyCode.D))
             {
                 photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, false);
                 currentSelectAbilityIdx = Mathf.Min(2, ++currentSelectAbilityIdx);
-                photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, true);
-                Debug.Log($"현재 선택 idx {currentSelectAbilityIdx}");
-            }
+                photonView.RPC("CardOutLineActive", RpcTarget.All, currentSelectAbilityIdx, true);            }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                string a = addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]];
-                Debug.Log($"{a}를 추가하려 했음"); // 하려던건 나옴
+                string selectAbilityName = addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]];
+                System.Type type = this.GetType();
 
-                MethodInfo mi = type.GetMethod(a, BindingFlags.NonPublic | BindingFlags.Instance);
-                Debug.Log($"mi에는 {mi}가 있습니다.");
-
+                MethodInfo mi = type.GetMethod(selectAbilityName, BindingFlags.NonPublic | BindingFlags.Instance);
                 mi.Invoke(this, null);
             }
         }
@@ -116,11 +110,6 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
                     break;
                 }
             }
-        }
-
-        for(int i = 0; i < randomAbilityIdxs.Length; ++i)
-        {
-            Debug.Log($"{i}번째 숫자는 {randomAbilityIdxs[i]}");
         }
     }
 
