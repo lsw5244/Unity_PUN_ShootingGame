@@ -39,6 +39,8 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
     [HideInInspector]
     public PlayerType winnerPlayer;
 
+    public GameSceneManager gameSceneManager;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -101,6 +103,8 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
 
                 MethodInfo mi = type.GetMethod(selectAbilityName, BindingFlags.NonPublic | BindingFlags.Instance);
                 mi.Invoke(this, null);
+
+                gameSceneManager.LoadNextRound();
             }
         }
     }     

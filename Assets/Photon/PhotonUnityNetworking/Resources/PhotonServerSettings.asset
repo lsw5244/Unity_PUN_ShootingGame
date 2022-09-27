@@ -69,6 +69,7 @@ MonoBehaviour:
   - AbilitySelectCanvasSetActiveRPC
   - AbilitySelectCanvasSettingRPC
   - CardOutLineActive
+  - LoadNextRoundRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -53,12 +53,7 @@ public class GameSceneManager : MonoBehaviour
     }
 
     public void EndGame(PlayerType winner)
-    {
-         /*
-            1. 스코어 증가
-            2. 어빌리티 선택 판넬 활성화
-         */
-        
+    {      
         if(winner == PlayerType.Blue)
         {
             GameScoreManager.Instance.BluePlayerScoreUP();
@@ -77,7 +72,6 @@ public class GameSceneManager : MonoBehaviour
     void AbilitySelectCanvasSettingRPC(bool canvasActive, bool bluePlayerWin = true)
     {
         abilitySelectCanvas.SetActive(true);
-
         abilityAdder.gameEnd = true;
 
         if(bluePlayerWin == true)
@@ -90,5 +84,16 @@ public class GameSceneManager : MonoBehaviour
             loserPlayerImage.sprite = bluePlayerSprite;
             abilityAdder.winnerPlayer = PlayerType.Pink;
         }
+    }
+
+    public void LoadNextRound()
+    {
+        photonView.RPC("LoadNextRoundRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void LoadNextRoundRPC()
+    {
+        PhotonNetwork.LoadLevel(2);
     }
 }
