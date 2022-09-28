@@ -74,10 +74,37 @@ public class GameSceneManager : MonoBehaviour
     [PunRPC]
     void AbilitySelectCanvasSettingRPC(bool canvasActive, bool bluePlayerWin = true)
     {
+        StartCoroutine(AbilitySelectCanvasSetting(canvasActive, bluePlayerWin));
+        //abilitySelectCanvas.SetActive(true);
+        //abilityAdder.gameEnd = true;
+
+        //if(bluePlayerWin == true)
+        //{
+        //    loserPlayerImage.sprite = pinkPlayerSprite;
+        //    abilityAdder.winnerPlayer = PlayerType.Blue;
+        //}
+        //else
+        //{
+        //    loserPlayerImage.sprite = bluePlayerSprite;
+        //    abilityAdder.winnerPlayer = PlayerType.Pink;
+        //}
+    }
+
+    IEnumerator AbilitySelectCanvasSetting(bool canvasActive, bool bluePlayerWin = true)
+    {
+        fadeImage.fillAmount = 0;
+        while (fadeImage.fillAmount < 1)
+        {
+            fadeImage.fillAmount += 0.015f;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
         abilitySelectCanvas.SetActive(true);
         abilityAdder.gameEnd = true;
 
-        if(bluePlayerWin == true)
+        if (bluePlayerWin == true)
         {
             loserPlayerImage.sprite = pinkPlayerSprite;
             abilityAdder.winnerPlayer = PlayerType.Blue;
@@ -86,6 +113,13 @@ public class GameSceneManager : MonoBehaviour
         {
             loserPlayerImage.sprite = bluePlayerSprite;
             abilityAdder.winnerPlayer = PlayerType.Pink;
+        }
+
+        fadeImage.fillAmount = 1;
+        while (fadeImage.fillAmount > 0)
+        {
+            fadeImage.fillAmount -= 0.015f;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -102,9 +136,20 @@ public class GameSceneManager : MonoBehaviour
 
     IEnumerator FadeIn() // ¹à¾ÆÁö±â
     {
-        while(fadeImage.fillAmount > 0)
+        fadeImage.fillAmount = 1;
+        while (fadeImage.fillAmount > 0)
         {
             fadeImage.fillAmount -= 0.015f;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    IEnumerator FadeOut()
+    {
+        fadeImage.fillAmount = 0;
+        while (fadeImage.fillAmount < 1)
+        {
+            fadeImage.fillAmount += 0.015f;
             yield return new WaitForSeconds(0.01f);
         }
     }
