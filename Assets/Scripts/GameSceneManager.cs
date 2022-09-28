@@ -61,37 +61,25 @@ public class GameSceneManager : MonoBehaviour
         {
             GameScoreManager.Instance.BluePlayerScoreUP();
             Debug.Log("Blue플레이어가 승리하여 점수가 올랐다 !!!");
-            photonView.RPC("AbilitySelectCanvasSettingRPC", RpcTarget.All, true, true);
+            photonView.RPC("AbilitySelectCanvasActivateRPC", RpcTarget.All, true);
         }
         else
         {
             GameScoreManager.Instance.PinkPlayerScoreUp();
             Debug.Log("Pink플레이어가 승리하여 점수가 올랐다 !!!");
-            photonView.RPC("AbilitySelectCanvasSettingRPC", RpcTarget.All, true, false);
+            photonView.RPC("AbilitySelectCanvasActivateRPC", RpcTarget.All, false);
         }
     }
 
     [PunRPC]
-    void AbilitySelectCanvasSettingRPC(bool canvasActive, bool bluePlayerWin = true)
+    void AbilitySelectCanvasActivateRPC(bool bluePlayerWin = true)
     {
-        StartCoroutine(AbilitySelectCanvasSetting(canvasActive, bluePlayerWin));
-        //abilitySelectCanvas.SetActive(true);
-        //abilityAdder.gameEnd = true;
-
-        //if(bluePlayerWin == true)
-        //{
-        //    loserPlayerImage.sprite = pinkPlayerSprite;
-        //    abilityAdder.winnerPlayer = PlayerType.Blue;
-        //}
-        //else
-        //{
-        //    loserPlayerImage.sprite = bluePlayerSprite;
-        //    abilityAdder.winnerPlayer = PlayerType.Pink;
-        //}
+        StartCoroutine(AbilitySelectCanvasActivate(bluePlayerWin));
     }
 
-    IEnumerator AbilitySelectCanvasSetting(bool canvasActive, bool bluePlayerWin = true)
+    IEnumerator AbilitySelectCanvasActivate(bool bluePlayerWin = true)
     {
+        // 페이드 아웃 효과
         fadeImage.fillAmount = 0;
         while (fadeImage.fillAmount < 1)
         {
@@ -101,6 +89,19 @@ public class GameSceneManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
+        AbilityUISetting(bluePlayerWin);
+        
+        // 페이드 인 효과
+        fadeImage.fillAmount = 1;
+        while (fadeImage.fillAmount > 0)
+        {
+            fadeImage.fillAmount -= 0.015f;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    void AbilityUISetting(bool bluePlayerWin = true)
+    {
         abilitySelectCanvas.SetActive(true);
         abilityAdder.gameEnd = true;
 
@@ -113,13 +114,6 @@ public class GameSceneManager : MonoBehaviour
         {
             loserPlayerImage.sprite = bluePlayerSprite;
             abilityAdder.winnerPlayer = PlayerType.Pink;
-        }
-
-        fadeImage.fillAmount = 1;
-        while (fadeImage.fillAmount > 0)
-        {
-            fadeImage.fillAmount -= 0.015f;
-            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -134,22 +128,12 @@ public class GameSceneManager : MonoBehaviour
         PhotonNetwork.LoadLevel(2);
     }
 
-    IEnumerator FadeIn() // 밝아지기
+    IEnumerator FadeIn()
     {
         fadeImage.fillAmount = 1;
         while (fadeImage.fillAmount > 0)
         {
             fadeImage.fillAmount -= 0.015f;
-            yield return new WaitForSeconds(0.01f);
-        }
-    }
-
-    IEnumerator FadeOut()
-    {
-        fadeImage.fillAmount = 0;
-        while (fadeImage.fillAmount < 1)
-        {
-            fadeImage.fillAmount += 0.015f;
             yield return new WaitForSeconds(0.01f);
         }
     }
