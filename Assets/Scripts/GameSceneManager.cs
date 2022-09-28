@@ -125,6 +125,21 @@ public class GameSceneManager : MonoBehaviour
     [PunRPC]
     void LoadNextRoundRPC()
     {
+        //PhotonNetwork.LoadLevel(2);
+        StartCoroutine(ChangeScene(2));
+    }
+
+    IEnumerator ChangeScene(int SceneNumber)
+    {
+        fadeImage.fillAmount = 0;
+        while (fadeImage.fillAmount < 1)
+        {
+            fadeImage.fillAmount += 0.015f;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
         PhotonNetwork.LoadLevel(2);
     }
 

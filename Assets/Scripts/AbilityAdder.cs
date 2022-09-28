@@ -105,6 +105,7 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
                 mi.Invoke(this, null);
 
                 gameSceneManager.LoadNextRound();
+                this.enabled = false;
             }
         }
     }     
