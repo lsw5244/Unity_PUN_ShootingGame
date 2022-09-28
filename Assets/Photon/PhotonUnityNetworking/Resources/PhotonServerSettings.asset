@@ -71,6 +71,9 @@ MonoBehaviour:
   - CardOutLineActive
   - LoadNextRoundRPC
   - AbilitySelectCanvasActivateRPC
+  - TempCS
+  - ChangeSceneRPC
+  - LoadSceneRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

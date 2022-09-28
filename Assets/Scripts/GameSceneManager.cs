@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 
@@ -119,17 +120,16 @@ public class GameSceneManager : MonoBehaviour
 
     public void LoadNextRound()
     {
-        photonView.RPC("LoadNextRoundRPC", RpcTarget.All);
+        photonView.RPC("ChangeSceneRPC", RpcTarget.All);
     }
 
     [PunRPC]
-    void LoadNextRoundRPC()
-    {
-        //PhotonNetwork.LoadLevel(2);
-        StartCoroutine(ChangeScene(2));
+    void ChangeSceneRPC()
+    {        
+        StartCoroutine(ChangeScene());
     }
 
-    IEnumerator ChangeScene(int SceneNumber)
+    IEnumerator ChangeScene()
     {
         fadeImage.fillAmount = 0;
         while (fadeImage.fillAmount < 1)
@@ -140,7 +140,16 @@ public class GameSceneManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        PhotonNetwork.LoadLevel(2);
+        if(PhotonNetwork.IsMasterClient == true)
+        {
+            photonView.RPC("LoadSceneRPC", RpcTarget.All, 2);
+        }
+    }
+
+    [PunRPC]
+    void LoadSceneRPC(int sceneNumber)
+    {
+        PhotonNetwork.LoadLevel(sceneNumber);
     }
 
     IEnumerator FadeIn()
