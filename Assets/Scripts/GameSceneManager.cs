@@ -32,6 +32,9 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField]
     private AbilityAdder abilityAdder;
 
+    [SerializeField]
+    private Image fadeImage;
+
     private void Awake()
     {
         if(PhotonNetwork.IsMasterClient == true)
@@ -49,7 +52,7 @@ public class GameSceneManager : MonoBehaviour
     private void Start()
     {
         GameScoreManager.Instance.StartRound();
-
+        StartCoroutine("FadeIn");
     }
 
     public void EndGame(PlayerType winner)
@@ -95,5 +98,14 @@ public class GameSceneManager : MonoBehaviour
     void LoadNextRoundRPC()
     {
         PhotonNetwork.LoadLevel(2);
+    }
+
+    IEnumerator FadeIn() // ¹à¾ÆÁö±â
+    {
+        while(fadeImage.fillAmount > 0)
+        {
+            fadeImage.fillAmount -= 0.015f;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }
