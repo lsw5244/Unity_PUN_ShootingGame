@@ -57,17 +57,21 @@ public class GameSceneManager : MonoBehaviour
     }
 
     public void EndGame(PlayerType winner)
-    {      
+    {
+        // 점수 2번 올리기 + UI 2번 활성화 방지
+        if(GameScoreManager.Instance.GetPlayRound() == false)
+        {
+            return;
+        }
+
         if(winner == PlayerType.Blue)
         {
             GameScoreManager.Instance.BluePlayerScoreUP();
-            Debug.Log("Blue플레이어가 승리하여 점수가 올랐다 !!!");
             photonView.RPC("AbilitySelectCanvasActivateRPC", RpcTarget.All, true);
         }
         else
         {
             GameScoreManager.Instance.PinkPlayerScoreUp();
-            Debug.Log("Pink플레이어가 승리하여 점수가 올랐다 !!!");
             photonView.RPC("AbilitySelectCanvasActivateRPC", RpcTarget.All, false);
         }
     }

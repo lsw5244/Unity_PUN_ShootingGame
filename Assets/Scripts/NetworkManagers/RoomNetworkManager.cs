@@ -106,6 +106,6 @@ public class RoomNetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void LoadSceneRPC(int sceneNumber)
     {
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(sceneNumber);
     }
 }

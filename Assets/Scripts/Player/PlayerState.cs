@@ -7,25 +7,25 @@ using Photon.Pun;
 
 public class PlayerState : MonoBehaviour//, IPunObservable
 {
-    public float maxHP;
-    public float HP;
-    public float moveSpeed;
-    public float jumpPower;
+    public float    maxHP;
+    public float    HP;
+    public float    moveSpeed;
+    public float    jumpPower;
 
-    public float fireDelay;
-    public float bulletPower;
+    public float    fireDelay;
+    public float    bulletPower;
 
-    public float attackDamage;
+    public float    attackDamage;
 
-    public float explosionDamage;
-    public float explosionRange;
+    public float    explosionDamage;
+    public float    explosionRange;
 
-    public float poisonDamage;
-    public int poisonCount;
+    public float    poisonDamage;
+    public int      poisonCount;
 
-    public int maxBulletCount;
+    public int      maxBulletCount;
 
-    public float reloadTime;
+    public float    reloadTime;
 
     [SerializeField]
     private Image hpBar;

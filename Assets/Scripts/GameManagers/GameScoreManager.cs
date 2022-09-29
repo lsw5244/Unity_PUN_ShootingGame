@@ -81,4 +81,9 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     {
         playRound = true;
     }
+
+    public bool GetPlayRound()
+    {
+        return playRound;
+    }
 }
