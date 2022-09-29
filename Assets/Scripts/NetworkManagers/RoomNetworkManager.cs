@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using Photon.Pun;
 
@@ -14,11 +15,14 @@ public class RoomNetworkManager : MonoBehaviourPunCallbacks
     private GameObject matchingCompleteUI;
     [SerializeField]
     private GameObject gameWaitingUI;
+    [SerializeField]
+    private GameObject startGameUI;
+
+    private bool serverReady = false;
+    private bool clientReady = false;
 
     [SerializeField]
-    private bool serverReady = false;
-    [SerializeField]
-    private bool clientReady = false;
+    private Image fadeImage;
 
     public override void OnJoinedRoom()
     {
@@ -67,7 +71,41 @@ public class RoomNetworkManager : MonoBehaviourPunCallbacks
     {
         if( clientReady == true && serverReady == true)
         {
-            PhotonNetwork.LoadLevel(2);
+            photonView.RPC("ChangeSceneRPC", RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    void ChangeSceneRPC()
+    {
+        gameWaitingUI.SetActive(false);
+        startGameUI.SetActive(true);
+
+        StartCoroutine(ChangeScene());
+    }
+
+    IEnumerator ChangeScene()
+    {
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.fillAmount = 0;
+
+        while (fadeImage.fillAmount < 1)
+        {
+            fadeImage.fillAmount += FadeProduction.FadeSpeed;
+            yield return new WaitForSeconds(FadeProduction.FadeDelay);
+        }
+
+        yield return new WaitForSeconds(FadeProduction.NextActionDelay);
+
+        if (PhotonNetwork.IsMasterClient == true)
+        {
+            photonView.RPC("LoadSceneRPC", RpcTarget.All, 2);
+        }
+    }
+
+    [PunRPC]
+    void LoadSceneRPC(int sceneNumber)
+    {
+        PhotonNetwork.LoadLevel(2);
     }
 }
