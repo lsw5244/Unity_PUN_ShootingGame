@@ -84,11 +84,11 @@ public class GameSceneManager : MonoBehaviour
         fadeImage.fillAmount = 0;
         while (fadeImage.fillAmount < 1)
         {
-            fadeImage.fillAmount += 0.015f;
-            yield return new WaitForSeconds(0.01f);
+            fadeImage.fillAmount += FadeProduction.FadeSpeed;
+            yield return new WaitForSeconds(FadeProduction.FadeDelay);
         }
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(FadeProduction.NextActionDelay);
 
         AbilityUISetting(bluePlayerWin);
         
@@ -96,8 +96,8 @@ public class GameSceneManager : MonoBehaviour
         fadeImage.fillAmount = 1;
         while (fadeImage.fillAmount > 0)
         {
-            fadeImage.fillAmount -= 0.015f;
-            yield return new WaitForSeconds(0.01f);
+            fadeImage.fillAmount -= FadeProduction.FadeSpeed;
+            yield return new WaitForSeconds(FadeProduction.FadeDelay);
         }
     }
 
@@ -134,11 +134,11 @@ public class GameSceneManager : MonoBehaviour
         fadeImage.fillAmount = 0;
         while (fadeImage.fillAmount < 1)
         {
-            fadeImage.fillAmount += 0.015f;
-            yield return new WaitForSeconds(0.01f);
+            fadeImage.fillAmount += FadeProduction.FadeSpeed;
+            yield return new WaitForSeconds(FadeProduction.FadeDelay);
         }
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(FadeProduction.NextActionDelay);
 
         if(PhotonNetwork.IsMasterClient == true)
         {
@@ -157,8 +157,8 @@ public class GameSceneManager : MonoBehaviour
         fadeImage.fillAmount = 1;
         while (fadeImage.fillAmount > 0)
         {
-            fadeImage.fillAmount -= 0.015f;
-            yield return new WaitForSeconds(0.01f);
+            fadeImage.fillAmount -= FadeProduction.FadeSpeed;
+            yield return new WaitForSeconds(FadeProduction.FadeDelay);
         }
     }
 }
