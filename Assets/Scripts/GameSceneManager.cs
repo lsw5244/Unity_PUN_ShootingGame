@@ -80,6 +80,12 @@ public class GameSceneManager : MonoBehaviour
         else
         {
             GameScoreManager.Instance.PinkPlayerScoreUp();
+            if (GameScoreManager.Instance.PinkPlayerWinCheck() == true)
+            {
+                Debug.Log("Pink플레이어가 게임에서 승리했다 !!!");
+                return;
+            }
+
             photonView.RPC("AbilitySelectCanvasActivateRPC", RpcTarget.All, false);
         }
     }
