@@ -12,10 +12,9 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
 
     PhotonView photonView;
     
-    [SerializeField]
-    private int leftPlayerScore = 0;
-    [SerializeField]
-    private int rightPlayerScore = 0;
+    public int bluePlayerScore = 0;
+    public int pinkPlayerScore = 0;
+    public int winScore = 3;
 
     private bool playRound = true;
 
@@ -24,14 +23,14 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             // 소유자가 다른사람에게 데이터 보내기
-            stream.SendNext(leftPlayerScore);
-            stream.SendNext(rightPlayerScore);
+            stream.SendNext(bluePlayerScore);
+            stream.SendNext(pinkPlayerScore);
         }
         else
         {
             // 클라이언트가 데이터 받기
-            this.leftPlayerScore = (int)stream.ReceiveNext();
-            this.rightPlayerScore = (int)stream.ReceiveNext();
+            this.bluePlayerScore = (int)stream.ReceiveNext();
+            this.pinkPlayerScore = (int)stream.ReceiveNext();
         }
     }
 
@@ -61,9 +60,21 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     {
         if(playRound == true)
         {
-            leftPlayerScore++;
-            Debug.Log("LeftPlayer의 점수가 올랏다 !");
+            bluePlayerScore++;
+            Debug.Log("BluePlayer의 점수 UP !");
             playRound = false;
+        }
+    }
+
+    public bool BluePlayerWinCheck()
+    {
+        if(bluePlayerScore >= winScore)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -71,9 +82,21 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     {
         if (playRound == true)
         {
-            rightPlayerScore++;
-            Debug.Log("RightPlayer의 점수가 올랏다 !");
+            pinkPlayerScore++;
+            Debug.Log("PinkPlayer의 점수 UP !");
             playRound = false;
+        }
+    }
+
+    public bool PinkPlayerWinCheck()
+    {
+        if (pinkPlayerScore >= winScore)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

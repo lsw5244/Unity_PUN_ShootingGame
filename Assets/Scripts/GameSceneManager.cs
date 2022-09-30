@@ -64,9 +64,17 @@ public class GameSceneManager : MonoBehaviour
             return;
         }
 
+        // 3점이 되었을 때 처리하기
+
         if(winner == PlayerType.Blue)
         {
             GameScoreManager.Instance.BluePlayerScoreUP();
+            if(GameScoreManager.Instance.BluePlayerWinCheck() == true)
+            {
+                Debug.Log("Blue플레이어가 게임에서 승리했다 !!!");
+                return;
+            }
+
             photonView.RPC("AbilitySelectCanvasActivateRPC", RpcTarget.All, true);
         }
         else
