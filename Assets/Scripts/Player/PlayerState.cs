@@ -114,7 +114,11 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     void DieRPC()
     {
         Instantiate(dieEffect, transform.position, Quaternion.identity);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
+        GetComponent<PlayerMove>().enabled = false;
+        GetComponent<PlayerFire>().enabled = false;
     }
 
     void HpBarUpdate()
