@@ -22,6 +22,8 @@ public class GameSceneManager : MonoBehaviour
 
     [SerializeField]
     private GameObject abilitySelectCanvas;
+    [SerializeField]
+    private GameObject gameOverCanvas;
 
     [SerializeField]
     private Image loserPlayerImage;

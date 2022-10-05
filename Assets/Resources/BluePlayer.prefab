@@ -489,6 +489,7 @@ MonoBehaviour:
   reloadTime: 1
   hpBar: {fileID: 1267503971}
   photonView: {fileID: 0}
+  dieEffect: {fileID: 4730101512398435582, guid: 9135b75f5584ca04798fc0707e1b2731, type: 3}
 --- !u!114 &1296844145618780352
 MonoBehaviour:
   m_ObjectHideFlags: 0

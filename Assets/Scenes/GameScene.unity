@@ -621,13 +621,14 @@ GameObject:
   - component: {fileID: 275729605}
   - component: {fileID: 275729604}
   - component: {fileID: 275729603}
+  - component: {fileID: 275729607}
   m_Layer: 5
-  m_Name: GameEndCanvas
+  m_Name: GameOverCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &275729603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,13 +703,27 @@ RectTransform:
   m_Children:
   - {fileID: 1403666151}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &275729607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275729602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c83678976187a47a619e6808294d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  winnerText: {fileID: 0}
 --- !u!1 &282989178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,7 +1650,7 @@ RectTransform:
   m_Children:
   - {fileID: 1928565380}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2949,6 +2964,7 @@ MonoBehaviour:
   lPlayerPrefabName: BluePlayer
   rPlayerPrefabName: PinkPlayer
   abilitySelectCanvas: {fileID: 1826327170}
+  gameOverCanvas: {fileID: 275729602}
   loserPlayerImage: {fileID: 1357986665}
   bluePlayerSprite: {fileID: 21300000, guid: c137c5dcadea38a4da73e75ba1f72daa, type: 3}
   pinkPlayerSprite: {fileID: 21300000, guid: 14440fa2471ca0b4486632fa0617ac40, type: 3}

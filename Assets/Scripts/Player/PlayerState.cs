@@ -35,6 +35,9 @@ public class PlayerState : MonoBehaviour//, IPunObservable
 
     private GameSceneManager gameSceneManager;
 
+    [SerializeField]
+    private GameObject dieEffect;
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -103,6 +106,15 @@ public class PlayerState : MonoBehaviour//, IPunObservable
             // 클라가 죽었을 때 처리
             gameSceneManager.EndGame(PlayerType.Blue);
         }
+
+        photonView.RPC("DieRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void DieRPC()
+    {
+        Instantiate(dieEffect, transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
     }
 
     void HpBarUpdate()
