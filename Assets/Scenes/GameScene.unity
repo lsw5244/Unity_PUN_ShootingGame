@@ -703,7 +703,7 @@ RectTransform:
   m_Children:
   - {fileID: 1403666151}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -722,8 +722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c83678976187a47a619e6808294d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  winnerText: {fileID: 0}
+  scoreText: {fileID: 282989180}
+  winnerText: {fileID: 1616589086}
 --- !u!1 &282989178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,7 +1650,7 @@ RectTransform:
   m_Children:
   - {fileID: 1928565380}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

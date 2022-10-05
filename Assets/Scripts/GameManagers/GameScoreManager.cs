@@ -9,9 +9,7 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
 {
     private static GameScoreManager _instance;
     public static GameScoreManager Instance { get { return _instance; } }
-
-    PhotonView photonView;
-    
+   
     public int bluePlayerScore = 0;
     public int pinkPlayerScore = 0;
     public int winScore = 3;
@@ -40,8 +38,6 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         {
             _instance = this;
 
-            photonView = gameObject.AddComponent<PhotonView>();
-
             DontDestroyOnLoad(this);
         }
         else
@@ -51,9 +47,10 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         }
     }
 
-    void Start()
+    void Update()
     {
-        //photonView = GetComponent<PhotonView>();
+        Debug.Log($"Blue Score : {bluePlayerScore}");
+        Debug.Log($"Pink Score : {pinkPlayerScore}");
     }
 
     public void BluePlayerScoreUP()

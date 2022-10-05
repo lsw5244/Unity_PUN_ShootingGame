@@ -66,14 +66,14 @@ public class GameSceneManager : MonoBehaviour
             return;
         }
 
-        // 3점이 되었을 때 처리하기
-
         if(winner == PlayerType.Blue)
         {
             GameScoreManager.Instance.BluePlayerScoreUP();
+            // 3점 이상(게임 승리)일 때 처리
             if(GameScoreManager.Instance.BluePlayerWinCheck() == true)
             {
-                Debug.Log("Blue플레이어가 게임에서 승리했다 !!!");
+                photonView.RPC("GameOverCanvasActivate", RpcTarget.All
+                    , GameScoreManager.Instance.bluePlayerScore, GameScoreManager.Instance.pinkPlayerScore);
                 return;
             }
 
@@ -84,12 +84,20 @@ public class GameSceneManager : MonoBehaviour
             GameScoreManager.Instance.PinkPlayerScoreUp();
             if (GameScoreManager.Instance.PinkPlayerWinCheck() == true)
             {
-                Debug.Log("Pink플레이어가 게임에서 승리했다 !!!");
+                photonView.RPC("GameOverCanvasActivate", RpcTarget.All
+                    , GameScoreManager.Instance.bluePlayerScore, GameScoreManager.Instance.pinkPlayerScore);
                 return;
             }
 
             photonView.RPC("AbilitySelectCanvasActivateRPC", RpcTarget.All, false);
         }
+    }
+
+    [PunRPC]
+    void GameOverCanvasActivate(int bluePlayerScore, int pinkPlayerscore)
+    {
+        gameOverCanvas.SetActive(true);
+        gameOverCanvas.GetComponent<GameOverCanvas>().CanvasSetting(bluePlayerScore, pinkPlayerscore);
     }
 
     [PunRPC]

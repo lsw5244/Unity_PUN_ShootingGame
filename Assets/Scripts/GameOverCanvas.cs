@@ -8,13 +8,13 @@ public class GameOverCanvas : MonoBehaviour
     [SerializeField]
     private Text scoreText;
     [SerializeField]
-    private Text winnerText;  
-    
-    void CanvasSetting()
+    private Text winnerText;
+
+    public void CanvasSetting(int bluePlayerScore, int pinkPlayerScore)
     {
-        scoreText.text = $"Blue {GameScoreManager.Instance.bluePlayerScore} vs Pink {GameScoreManager.Instance.pinkPlayerScore}";
+        scoreText.text = $"Blue {bluePlayerScore} vs Pink {pinkPlayerScore}";
         // Blue Player Win !!!
-        winnerText.text = (GameScoreManager.Instance.bluePlayerScore > GameScoreManager.Instance.pinkPlayerScore)
+        winnerText.text = (bluePlayerScore > pinkPlayerScore)
             ? "Blue Player Win !!!" : "Pink Player Win !!!";
     }
 }
