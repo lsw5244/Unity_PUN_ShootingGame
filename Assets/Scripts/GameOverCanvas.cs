@@ -13,7 +13,6 @@ public class GameOverCanvas : MonoBehaviour
     public void CanvasSetting(int bluePlayerScore, int pinkPlayerScore)
     {
         scoreText.text = $"Blue {bluePlayerScore} vs Pink {pinkPlayerScore}";
-        // Blue Player Win !!!
         winnerText.text = (bluePlayerScore > pinkPlayerScore)
             ? "Blue Player Win !!!" : "Pink Player Win !!!";
     }

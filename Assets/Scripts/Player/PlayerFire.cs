@@ -55,7 +55,7 @@ public class PlayerFire : MonoBehaviour
             for (int i = 0; i < state.maxBulletCount; ++i)
             {
                 bulletCountUIs[i] = PhotonNetwork.Instantiate("BulletCountUI", Vector3.zero, Quaternion.identity);
-                bulletCountUIs[i].GetComponent<BulletCountUI>().SetParent(photonView.ViewID);
+                bulletCountUIs[i].GetComponent<BulletCountUI>().SetParent(photonView.ViewID);                
                 bulletCountUIs[i].transform.localPosition = new Vector3(xPos, yPos, 0f);
                 yPos += 0.15f;  // 각 UI간의 거리
             }
@@ -194,4 +194,17 @@ public class PlayerFire : MonoBehaviour
 
         canFire = true;
     }
+
+    public void DisableBulletCountUI()
+    {
+        if(photonView.IsMine == false)
+        {
+            return;
+        }
+
+        for(int i = 0; i < bulletCountUIs.Length; ++i)
+        {
+            bulletCountUIs[i].GetComponent<BulletCountUI>().SetActive(false);
+        }
+    }    
 }

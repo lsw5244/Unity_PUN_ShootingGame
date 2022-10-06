@@ -116,8 +116,9 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         Instantiate(dieEffect, transform.position, Quaternion.identity);
         
         GetComponentInChildren<SpriteRenderer>().gameObject.SetActive(false);
-        GetComponent<PlayerMove>().enabled = false;
+        GetComponent<PlayerFire>().DisableBulletCountUI();
         GetComponent<PlayerFire>().enabled = false;
+        GetComponent<PlayerMove>().enabled = false;
     }
 
     void HpBarUpdate()

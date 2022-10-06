@@ -20,7 +20,7 @@ public class BulletCountUI : MonoBehaviour
     [PunRPC]
     void SetParentRPC(int ParentViewID)
     {
-        transform.parent = PhotonView.Find(ParentViewID).gameObject.GetComponent<Transform>();
+        transform.parent = PhotonView.Find(ParentViewID).gameObject.transform;
     }
 
     public void SetActive(bool Active)
