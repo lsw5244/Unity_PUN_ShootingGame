@@ -131,6 +131,16 @@ public class PlayerState : MonoBehaviour//, IPunObservable
 
     void HpBarUpdate()
     {
-        hpBar.fillAmount = HP / maxHP;
+        //hpBar.fillAmount = HP / maxHP;
+        if(photonView.IsMine == true)
+        {
+            photonView.RPC("HpBarUpdateRPC", RpcTarget.All, HP / maxHP);
+        }
+    }
+
+    [PunRPC]
+    void HpBarUpdateRPC(float fillAmount)
+    {
+        hpBar.fillAmount = fillAmount;
     }
 }
