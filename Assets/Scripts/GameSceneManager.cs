@@ -117,7 +117,7 @@ public class GameSceneManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(FadeProduction.NextActionDelay);
-
+        // AbilityUI 활성화
         AbilityUISetting(bluePlayerWin);
         
         // 페이드 인 효과
@@ -145,7 +145,7 @@ public class GameSceneManager : MonoBehaviour
             abilityAdder.winnerPlayer = PlayerType.Pink;
         }
     }
-
+    // 외부에서 ChangeSceneRPC를 호출하기 위한 핼퍼 함수
     public void LoadNextRound()
     {
         photonView.RPC("ChangeSceneRPC", RpcTarget.All);
@@ -153,7 +153,9 @@ public class GameSceneManager : MonoBehaviour
 
     [PunRPC]
     void ChangeSceneRPC()
-    {        
+    {
+        // 페이드인 효과 중 씬 변경 시 바로 페이드인 코루틴 정지
+        StopAllCoroutines();
         StartCoroutine(ChangeScene());
     }
 
