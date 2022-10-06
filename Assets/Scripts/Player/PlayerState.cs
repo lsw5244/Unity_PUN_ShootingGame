@@ -38,6 +38,8 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     [SerializeField]
     private GameObject dieEffect;
 
+    private bool isDie = false;
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -82,6 +84,11 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     [PunRPC]
     void GetDamageRPC(float Damage)
     {
+        if(isDie == true)
+        {
+            return;
+        }
+
         HP -= Damage;
         HpBarUpdate();
 
@@ -89,6 +96,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         {
             if (HP <= 0)
             {
+                isDie = true;
                 Die();
             }
         }
