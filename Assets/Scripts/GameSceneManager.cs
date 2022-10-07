@@ -98,6 +98,8 @@ public class GameSceneManager : MonoBehaviour
     {
         gameOverCanvas.SetActive(true);
         gameOverCanvas.GetComponent<GameOverCanvas>().CanvasSetting(bluePlayerScore, pinkPlayerscore);
+        PhotonNetwork.LeaveRoom();
+        
     }
 
     [PunRPC]
@@ -190,5 +192,10 @@ public class GameSceneManager : MonoBehaviour
             fadeImage.fillAmount -= FadeProduction.FadeSpeed;
             yield return new WaitForSeconds(FadeProduction.FadeDelay);
         }
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
