@@ -196,6 +196,16 @@ public class GameSceneManager : MonoBehaviour
 
     public void ExitGame()
     {
+        DestoryManagerObjects();
         SceneManager.LoadScene(0);
+    }
+
+    void DestoryManagerObjects()
+    {
+        Destroy(GameObject.Find("GameScoreManager"));
+        Destroy(GameObject.Find("ImpactAbilityManager"));
+        Destroy(GameObject.Find("HitAbilityManager"));
+        Destroy(GameObject.Find("StatAbilityManager"));
+        Destroy(GameObject.Find("PlayerStatusManager"));
     }
 }
