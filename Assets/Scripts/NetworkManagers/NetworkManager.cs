@@ -48,8 +48,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public bool EnterRoom(string RoomName)
     {
-        //PhotonNetwork.LoadLevel(1);   // 마스터 클라이언트에서 호출하는 것
-
         if ( PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null) )
         {
             return true;

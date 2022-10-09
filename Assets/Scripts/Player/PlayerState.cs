@@ -54,6 +54,8 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     {
         maxHP = PlayerStatusManager.Instance.MaxHP;
         HP = maxHP;
+        photonView.RPC("ShareMaxHP", RpcTarget.Others, maxHP);
+
         moveSpeed = PlayerStatusManager.Instance.MoveSpeed;
         jumpPower = PlayerStatusManager.Instance.JumpPower;
 
@@ -71,8 +73,13 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         maxBulletCount = PlayerStatusManager.Instance.MaxBulletCount;
 
         reloadTime = PlayerStatusManager.Instance.ReloadTime;
+    }
 
-        Debug.Log($"내 플래이어 스텟 Init MaxBulletcount : {maxBulletCount}");
+    [PunRPC]
+    void ShareMaxHP(float maxHP)
+    {
+        this.maxHP = maxHP;
+        this.HP = this.maxHP;
     }
 
     // 외부에서 RPC를 호출하도록 도와주는 헬퍼함수
