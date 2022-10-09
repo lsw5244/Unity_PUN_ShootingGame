@@ -20,7 +20,14 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        Connect();
+        if(PhotonNetwork.IsConnected == true)
+        {
+            OnJoinedLobby();
+        }
+        else
+        {
+            Connect();
+        }
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
