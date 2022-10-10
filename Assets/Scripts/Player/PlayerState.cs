@@ -83,6 +83,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     }
 
     // 외부에서 RPC를 호출하도록 도와주는 헬퍼함수
+    // 총알을 쏜 객체(공격 한 클라이언트)가 호출한다.
     public void GetDamage(float Damage)
     {
         photonView.RPC("GetDamageRPC", RpcTarget.All, Damage);
@@ -149,5 +150,28 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     void HpBarUpdateRPC(float fillAmount)
     {
         hpBar.fillAmount = fillAmount;
+    }
+
+    public void WallHit(WallType hitWallType, float pushPower)
+    {
+        if(photonView.IsMine == true)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            switch (hitWallType)
+            {
+                case WallType.Left:
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * pushPower);
+                    break;
+                case WallType.Right:
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.left * pushPower);
+                    break;
+                case WallType.Top:
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.down * pushPower);
+                    break;
+                case WallType.Bottom:
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.up * pushPower);
+                    break;
+            }
+        }
     }
 }

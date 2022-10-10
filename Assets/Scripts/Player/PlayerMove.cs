@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     private float horizontalInput;
 
     private PhotonView photonView;
+
+    public bool canMove = true;
     void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
@@ -24,7 +26,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(photonView.IsMine == true)
+        if(photonView.IsMine == true && canMove == true)
         {
             Move();
         }
@@ -32,7 +34,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (photonView.IsMine == true)
+        if (photonView.IsMine == true && canMove == true)
         {
             Jump();
         }

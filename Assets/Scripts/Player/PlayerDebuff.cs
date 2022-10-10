@@ -58,4 +58,18 @@ public class PlayerDebuff : MonoBehaviour
 
         this.isPoisonState = isPoisonState;
     }
+    
+    public void StartMoveFreeze(float FreezeTime)
+    {
+        StartCoroutine(MoveFreeze(FreezeTime));
+    }
+
+    IEnumerator MoveFreeze(float FreezeTime)
+    {
+        GetComponent<PlayerMove>().canMove = false;
+
+        yield return new WaitForSeconds(FreezeTime);
+
+        GetComponent<PlayerMove>().canMove = true;
+    }
 }
