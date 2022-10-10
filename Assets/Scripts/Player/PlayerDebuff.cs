@@ -12,8 +12,11 @@ public class PlayerDebuff : MonoBehaviour
 
     private int damageCount;
     private bool isPoisonState = false;
-
     private float poisonDamageDelay = 0.5f;
+
+    private float moveFreezeRunTime = 0f;
+    private float moveFreezeTime;
+    private bool isMoveFreezeState = false;
 
     void Start()
     {
@@ -58,18 +61,33 @@ public class PlayerDebuff : MonoBehaviour
 
         this.isPoisonState = isPoisonState;
     }
-    
+
     public void StartMoveFreeze(float FreezeTime)
     {
-        StartCoroutine(MoveFreeze(FreezeTime));
+        moveFreezeTime = FreezeTime;
+        if (isMoveFreezeState == false)
+        {
+            StartCoroutine(MoveFreeze());
+        }
+        else
+        {
+            moveFreezeRunTime = 0.0f;
+        }
     }
 
-    IEnumerator MoveFreeze(float FreezeTime)
+    IEnumerator MoveFreeze()
     {
+        isMoveFreezeState = true;
         GetComponent<PlayerMove>().canMove = false;
+        moveFreezeRunTime = 0.0f;
 
-        yield return new WaitForSeconds(FreezeTime);
+        while(moveFreezeRunTime < moveFreezeTime)
+        { 
+            moveFreezeRunTime += Time.deltaTime;
+            yield return null;
+        }
 
         GetComponent<PlayerMove>().canMove = true;
+        isMoveFreezeState = false;
     }
 }
