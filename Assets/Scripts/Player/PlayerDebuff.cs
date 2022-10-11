@@ -95,17 +95,25 @@ public class PlayerDebuff : MonoBehaviour
         isMoveFreezeState = true;
         GetComponent<PlayerMove>().canMove = false;
         moveFreezeRunTime = 0.0f;
+        photonView.RPC("SettingfreezeProgressBarFillAmount", RpcTarget.All, 1.0f);
         freezeProgressBar.fillAmount = 1.0f;
 
         while (moveFreezeRunTime < moveFreezeTime)
         { 
             moveFreezeRunTime += Time.deltaTime;
-            freezeProgressBar.fillAmount = 1.0f - moveFreezeRunTime / moveFreezeTime;
+            photonView.RPC("SettingfreezeProgressBarFillAmount", RpcTarget.All, 1.0f - moveFreezeRunTime / moveFreezeTime);
+            //freezeProgressBar.fillAmount = 1.0f - moveFreezeRunTime / moveFreezeTime;
             yield return null;
         }
 
         GetComponent<PlayerMove>().canMove = true;
-        freezeProgressBar.fillAmount = 0.0f;
+        photonView.RPC("SettingfreezeProgressBarFillAmount", RpcTarget.All, 0.0f);
         isMoveFreezeState = false;
+    }
+
+    [PunRPC]
+    void SettingfreezeProgressBarFillAmount(float amount)
+    {
+        freezeProgressBar.fillAmount = amount;
     }
 }
