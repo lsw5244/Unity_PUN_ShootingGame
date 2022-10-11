@@ -9,11 +9,12 @@ using Photon.Pun;
 public class AbilityAdder : MonoBehaviour, IPunObservable
 {
     private string[] addAbilityNames
-        = { "AddBulletExplosion", "AddPoisonBullet", "AddGlassCannon", "AddCombine"  };
-
+        = { "AddBulletExplosion", "AddPoisonBullet", "AddGlassCannon", "AddCombine", "AddFreezeBullet" };
     private string[] abilityInfos
         = { "총알이 충격을 받으면 폭발합니다.", "총알에 독 데미지가 추가됩니다."
-            , "데미지 X 2\nHp / 2\n재장전 시간 + 0.25s", "데미지 X2\n최대 장탄수 - 2\n재장전 시간 + 0.5s" };
+            , "데미지 X 2\nHp / 2\n재장전 시간 + 0.25s", "데미지 X2\n최대 장탄수 - 2\n재장전 시간 + 0.5s"
+            , "총알을 맞은 상대는 이동불가 상태가 됩니다."};
+
     [SerializeField]
     private Sprite[] abilityImagesResources;
 
@@ -166,5 +167,11 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
     {
         Debug.Log("3. AddCombine 실행 !!!");
         StatAbilityManager.Instance.Combine();
+    }
+
+    void AddFreezeBullet()
+    {
+        Debug.Log("4. AddFreezeBullet 실행 !!!");
+        HitAbilityManager.Instance.AddFreezeBullet();
     }
 }

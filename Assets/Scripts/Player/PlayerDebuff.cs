@@ -74,6 +74,7 @@ public class PlayerDebuff : MonoBehaviour
         {
             return;
         }
+
         moveFreezeTime = FreezeTime;
         if (isMoveFreezeState == false)
         {
