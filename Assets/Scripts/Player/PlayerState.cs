@@ -23,6 +23,8 @@ public class PlayerState : MonoBehaviour//, IPunObservable
     public float    poisonDamage;
     public int      poisonCount;
 
+    public float    freezeTime;
+
     public int      maxBulletCount;
 
     public float    reloadTime;
@@ -69,6 +71,8 @@ public class PlayerState : MonoBehaviour//, IPunObservable
 
         poisonDamage = PlayerStatusManager.Instance.PoisonDamage;
         poisonCount = PlayerStatusManager.Instance.PoisonCount;
+
+        freezeTime = PlayerStatusManager.Instance.FreezeTime;
 
         maxBulletCount = PlayerStatusManager.Instance.MaxBulletCount;
 

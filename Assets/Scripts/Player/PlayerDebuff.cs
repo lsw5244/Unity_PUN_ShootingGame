@@ -64,6 +64,16 @@ public class PlayerDebuff : MonoBehaviour
 
     public void StartMoveFreeze(float FreezeTime)
     {
+        photonView.RPC("StartMoveFreezeRPC", RpcTarget.All, FreezeTime);
+    }
+
+    [PunRPC]
+    void StartMoveFreezeRPC(float FreezeTime)
+    {
+        if(photonView.IsMine == false)
+        {
+            return;
+        }
         moveFreezeTime = FreezeTime;
         if (isMoveFreezeState == false)
         {

@@ -575,6 +575,7 @@ MonoBehaviour:
   explosionRange: 1
   poisonDamage: 10
   poisonCount: 3
+  freezeTime: 0
   maxBulletCount: 3
   reloadTime: 1
   hpBar: {fileID: 1626877154}

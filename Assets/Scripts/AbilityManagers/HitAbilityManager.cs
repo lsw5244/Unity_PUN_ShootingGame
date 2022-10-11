@@ -30,9 +30,18 @@ public class HitAbilityManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            AddFreezeBullet();
+            Debug.Log("FreezeBullet√ﬂ∞°");
+        }
+    }
+
     public void AddPoisonBullet()
     {
-        if(PlayerStatusManager.Instance.PoisonDamage <= 0)
+        if(PlayerStatusManager.Instance.PoisonDamage <= 0f)
         {
             hitAbility -= PoisonBullet;
             hitAbility += PoisonBullet;
@@ -48,5 +57,21 @@ public class HitAbilityManager : MonoBehaviour
         int poisonCount = ShootPlayer.GetComponent<PlayerState>().poisonCount;
 
         HitPlayer.GetComponent<PlayerDebuff>().StartPoison(poisonDamage, poisonCount);
+    }
+
+    public void AddFreezeBullet()
+    {
+        if(PlayerStatusManager.Instance.FreezeTime <= 0f)
+        {
+            hitAbility -= FreezeBullet;
+            hitAbility += FreezeBullet;
+        }
+
+        PlayerStatusManager.Instance.FreezeTime += 0.5f;
+    }
+
+    void FreezeBullet(GameObject ShootPlayer, GameObject HitPlayer)
+    {
+        HitPlayer.GetComponent<PlayerDebuff>().StartMoveFreeze(ShootPlayer.GetComponent<PlayerState>().freezeTime);
     }
 }

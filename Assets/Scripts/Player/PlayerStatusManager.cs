@@ -22,6 +22,8 @@ public class PlayerStatusManager : MonoBehaviour
     public float PoisonDamage       { get; set; }
     public int PoisonCount          { get; set; }
 
+    public float FreezeTime         { get; set; }
+
     public int MaxBulletCount       { get; set; }
 
     public float ReloadTime         { get; set; }
@@ -58,6 +60,8 @@ public class PlayerStatusManager : MonoBehaviour
 
         PoisonDamage    = 0f;//10f;
         PoisonCount     = 0;// 3;
+
+        FreezeTime      = 0f;// 0.5f;
 
         MaxBulletCount  = 3;
 
