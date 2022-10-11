@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using Photon.Pun;
 
@@ -17,6 +18,9 @@ public class PlayerDebuff : MonoBehaviour
     private float moveFreezeRunTime = 0f;
     private float moveFreezeTime;
     private bool isMoveFreezeState = false;
+
+    [SerializeField]
+    private Image freezeProgressBar;
 
     void Start()
     {
@@ -91,14 +95,17 @@ public class PlayerDebuff : MonoBehaviour
         isMoveFreezeState = true;
         GetComponent<PlayerMove>().canMove = false;
         moveFreezeRunTime = 0.0f;
+        freezeProgressBar.fillAmount = 1.0f;
 
-        while(moveFreezeRunTime < moveFreezeTime)
+        while (moveFreezeRunTime < moveFreezeTime)
         { 
             moveFreezeRunTime += Time.deltaTime;
+            freezeProgressBar.fillAmount = 1.0f - moveFreezeRunTime / moveFreezeTime;
             yield return null;
         }
 
         GetComponent<PlayerMove>().canMove = true;
+        freezeProgressBar.fillAmount = 0.0f;
         isMoveFreezeState = false;
     }
 }
