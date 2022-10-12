@@ -940,6 +940,7 @@ MonoBehaviour:
   wallType: 2
   pushPower: 700
   freezeTime: 0.1
+  damage: 30
 --- !u!1 &431865616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1066,7 @@ MonoBehaviour:
   wallType: 3
   pushPower: 700
   freezeTime: 0.1
+  damage: 30
 --- !u!1 &492858961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,6 +1226,7 @@ MonoBehaviour:
   wallType: 1
   pushPower: 1000
   freezeTime: 1
+  damage: 30
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,6 +3180,7 @@ MonoBehaviour:
   wallType: 0
   pushPower: 1000
   freezeTime: 1
+  damage: 30
 --- !u!1 &1763184975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3865,6 +3869,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a2e044d3919b7cf46b1716b54ed84f1e, type: 3}
   - {fileID: 21300000, guid: c20cac56ebbaa67478d012075aaea516, type: 3}
   - {fileID: 21300000, guid: 34aee80411a17c44fb39fc4ea087ec20, type: 3}
+  - {fileID: 21300000, guid: 284e6d6e4c0395248a4134319cea24f5, type: 3}
   abilityImages:
   - {fileID: 915026633}
   - {fileID: 60822510}
