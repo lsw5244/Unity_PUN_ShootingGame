@@ -30,15 +30,6 @@ public class HitAbilityManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            AddFreezeBullet();
-            Debug.Log("FreezeBullet√ﬂ∞°");
-        }
-    }
-
     public void AddPoisonBullet()
     {
         if(PlayerStatusManager.Instance.PoisonDamage <= 0f)

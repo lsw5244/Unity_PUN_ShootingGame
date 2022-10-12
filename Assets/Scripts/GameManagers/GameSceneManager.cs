@@ -58,15 +58,6 @@ public class GameSceneManager : MonoBehaviour
         StartCoroutine("FadeIn");
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F) && PhotonNetwork.IsMasterClient == true)
-        {
-            StatAbilityManager.Instance.Sniper();
-            Debug.Log("스나이퍼 특성 발동 !!!");
-        }
-    }
-
     public void EndGame(PlayerType winner)
     {
         // 점수 2번 올리기 + UI 2번 활성화 방지
