@@ -156,7 +156,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         hpBar.fillAmount = fillAmount;
     }
 
-    public void WallHit(WallType hitWallType, float pushPower)
+    public void WallHit(WallType hitWallType, float pushPower, float damage)
     {
         if(photonView.IsMine == true)
         {
@@ -176,6 +176,7 @@ public class PlayerState : MonoBehaviour//, IPunObservable
                     GetComponent<Rigidbody2D>().AddForce(Vector2.up * pushPower);
                     break;
             }
+            GetDamage(damage);
         }
     }
 }

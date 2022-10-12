@@ -11,13 +11,14 @@ public class Wall : MonoBehaviour
     private float pushPower = 1000f;
     [SerializeField]
     private float freezeTime = 1f;
-
+    [SerializeField]
+    private float damage = 30f;
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if(coll.gameObject.CompareTag("Player") == true)
         {
             coll.gameObject.GetComponent<PlayerDebuff>().StartMoveFreeze(freezeTime);
-            coll.gameObject.GetComponent<PlayerState>().WallHit(wallType, pushPower);
+            coll.gameObject.GetComponent<PlayerState>().WallHit(wallType, pushPower, damage);
             
         }
     }
