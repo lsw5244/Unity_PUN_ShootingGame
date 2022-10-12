@@ -48,8 +48,9 @@ public class StatAbilityManager : MonoBehaviour
         PlayerStatusManager.Instance.ReloadTime += 0.5f;        
     }
 
-    //public void Sniper()
-    //{
-    //    PlayerStatusManager.Instance.BulletPower *= 2f;
-    //}
+    public void Sniper()
+    {
+        PlayerStatusManager.Instance.BulletPower *= 1.5f;
+        PlayerStatusManager.Instance.FireDelay += 0.25f;
+    }
 }
