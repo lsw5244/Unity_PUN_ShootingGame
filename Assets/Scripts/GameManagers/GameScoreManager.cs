@@ -13,7 +13,7 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     public int bluePlayerScore = 0;
     public int pinkPlayerScore = 0;
     public int winScore = 3;
-
+    // 점수가 2번 올라가는걸 방지하기위해 현재 게임이 진행되고 있는지를 확인하는 함수
     private bool playRound = true;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

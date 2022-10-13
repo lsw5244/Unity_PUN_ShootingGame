@@ -435,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &90402581
 Transform:
   m_ObjectHideFlags: 0
@@ -3827,8 +3827,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b78088a60590d4b9517b99939e7418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lSpawnPos: {fileID: 12699342}
-  rSpawnPos: {fileID: 97564735}
+  maps:
+  - {fileID: 1371585397}
+  - {fileID: 90402580}
+  lSpawnPos:
+  - {fileID: 12699342}
+  - {fileID: 1375525604}
+  rSpawnPos:
+  - {fileID: 97564735}
+  - {fileID: 369772949}
   lPlayerPrefabName: BluePlayer
   rPlayerPrefabName: PinkPlayer
   abilitySelectCanvas: {fileID: 1826327170}

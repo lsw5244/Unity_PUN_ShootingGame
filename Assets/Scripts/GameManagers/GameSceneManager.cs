@@ -9,11 +9,13 @@ using Photon.Pun;
 public class GameSceneManager : MonoBehaviour
 {
     private PhotonView photonView;
-    
+
     [SerializeField]
-    private Transform lSpawnPos;
+    private GameObject[] maps;
     [SerializeField]
-    private Transform rSpawnPos;
+    private Transform[] lSpawnPos;
+    [SerializeField]
+    private Transform[] rSpawnPos;
 
     [SerializeField]
     private string lPlayerPrefabName;
@@ -40,16 +42,27 @@ public class GameSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        photonView = GetComponent<PhotonView>();
+
         if(PhotonNetwork.IsMasterClient == true)
         {
-            PhotonNetwork.Instantiate(lPlayerPrefabName, lSpawnPos.position, Quaternion.identity);
+            int selectMapIdx = Random.Range(0, maps.Length);
+            photonView.RPC("RoundSetting",RpcTarget.All, selectMapIdx);
+        }
+    }
+
+    [PunRPC]
+    void RoundSetting(int mapIdx)
+    {
+        maps[mapIdx].SetActive(true);
+        if (PhotonNetwork.IsMasterClient == true)
+        {
+            PhotonNetwork.Instantiate(lPlayerPrefabName, lSpawnPos[mapIdx].position, Quaternion.identity);
         }
         else
         {
-            PhotonNetwork.Instantiate(rPlayerPrefabName, rSpawnPos.position, Quaternion.identity);            
+            PhotonNetwork.Instantiate(rPlayerPrefabName, rSpawnPos[mapIdx].position, Quaternion.identity);
         }
-
-        photonView = GetComponent<PhotonView>();
     }
 
     private void Start()

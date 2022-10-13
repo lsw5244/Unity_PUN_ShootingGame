@@ -80,6 +80,8 @@ MonoBehaviour:
   - ShareMaxHP
   - StartMoveFreezeRPC
   - SettingfreezeProgressBarFillAmount
+  - PlayerCreate
+  - RoundSetting
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
