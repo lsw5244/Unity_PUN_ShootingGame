@@ -13,8 +13,8 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
     public int bluePlayerScore = 0;
     public int pinkPlayerScore = 0;
     public int winScore = 3;
-    // 점수가 2번 올라가는걸 방지하기위해 현재 게임이 진행되고 있는지를 확인하는 함수
-    private bool playRound = true;
+
+    private string gameSceneManagerName = "GameSceneManager";
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -47,19 +47,13 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         }
     }
 
-    void Update()
-    {
-        Debug.Log($"Blue Score : {bluePlayerScore}");
-        Debug.Log($"Pink Score : {pinkPlayerScore}");
-    }
-
     public void BluePlayerScoreUP()
     {
-        if(playRound == true)
+        if(GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound == true)
         {
             bluePlayerScore++;
             Debug.Log("BluePlayer의 점수 UP !");
-            playRound = false;
+            GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound = false;
         }
     }
 
@@ -77,11 +71,11 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
 
     public void PinkPlayerScoreUp()
     {
-        if (playRound == true)
+        if (GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound == true)
         {
             pinkPlayerScore++;
             Debug.Log("PinkPlayer의 점수 UP !");
-            playRound = false;
+            GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound = false;
         }
     }
 
@@ -95,15 +89,5 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         {
             return false;
         }
-    }
-
-    public void StartRound()
-    {
-        playRound = true;
-    }
-
-    public bool GetPlayRound()
-    {
-        return playRound;
     }
 }

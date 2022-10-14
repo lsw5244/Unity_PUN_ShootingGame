@@ -40,6 +40,9 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField]
     private Image fadeImage;
 
+    [HideInInspector]
+    public bool playRound = true;
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -67,14 +70,14 @@ public class GameSceneManager : MonoBehaviour
 
     private void Start()
     {
-        GameScoreManager.Instance.StartRound();
-        StartCoroutine("FadeIn");
+        playRound = true;
+        StartCoroutine(FadeIn());
     }
 
     public void EndGame(PlayerType winner)
     {
         // 점수 2번 올리기 + UI 2번 활성화 방지
-        if(GameScoreManager.Instance.GetPlayRound() == false)
+        if(playRound == false)
         {
             return;
         }
@@ -176,15 +179,16 @@ public class GameSceneManager : MonoBehaviour
 
     IEnumerator ChangeScene()
     {
+        // 페이드 아웃 효과
         fadeImage.fillAmount = 0;
         while (fadeImage.fillAmount < 1)
         {
             fadeImage.fillAmount += FadeProduction.FadeSpeed;
             yield return new WaitForSeconds(FadeProduction.FadeDelay);
         }
-
         yield return new WaitForSeconds(FadeProduction.NextActionDelay);
 
+        // 실제로 씬 변경
         if(PhotonNetwork.IsMasterClient == true)
         {
             photonView.RPC("LoadSceneRPC", RpcTarget.All, 2);
