@@ -17,6 +17,8 @@ public class PlayerMove : MonoBehaviour
     private PhotonView photonView;
 
     public bool canMove = true;
+    private bool isGround = false;
+
     void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
@@ -34,7 +36,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (photonView.IsMine == true && canMove == true)
+        if (photonView.IsMine == true && canMove == true && isGround == true)
         {
             Jump();
         }
@@ -69,5 +71,15 @@ public class PlayerMove : MonoBehaviour
             rigi.velocity = Vector2.zero;
             rigi.AddForce(Vector2.up * state.jumpPower);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isGround = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isGround = false;
     }
 }
