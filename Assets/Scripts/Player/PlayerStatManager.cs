@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatusManager : MonoBehaviour
+public class PlayerStatManager : MonoBehaviour
 {
-    public static PlayerStatusManager Instance;
+    public static PlayerStatManager Instance;
 
     public float MaxHP              { get; set; }
 

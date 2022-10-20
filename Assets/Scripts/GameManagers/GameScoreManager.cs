@@ -52,7 +52,6 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         if(GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound == true)
         {
             bluePlayerScore++;
-            Debug.Log("BluePlayer의 점수 UP !");
             GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound = false;
         }
     }
@@ -74,7 +73,6 @@ public class GameScoreManager : MonoBehaviour, IPunObservable
         if (GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound == true)
         {
             pinkPlayerScore++;
-            Debug.Log("PinkPlayer의 점수 UP !");
             GameObject.Find(gameSceneManagerName).GetComponent<GameSceneManager>().playRound = false;
         }
     }

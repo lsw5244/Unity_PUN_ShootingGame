@@ -54,29 +54,29 @@ public class PlayerState : MonoBehaviour//, IPunObservable
 
     void StatusInit()
     {
-        maxHP = PlayerStatusManager.Instance.MaxHP;
+        maxHP = PlayerStatManager.Instance.MaxHP;
         HP = maxHP;
         photonView.RPC("ShareMaxHP", RpcTarget.Others, maxHP);
 
-        moveSpeed = PlayerStatusManager.Instance.MoveSpeed;
-        jumpPower = PlayerStatusManager.Instance.JumpPower;
+        moveSpeed = PlayerStatManager.Instance.MoveSpeed;
+        jumpPower = PlayerStatManager.Instance.JumpPower;
 
-        fireDelay = PlayerStatusManager.Instance.FireDelay;
-        bulletPower = PlayerStatusManager.Instance.BulletPower;
+        fireDelay = PlayerStatManager.Instance.FireDelay;
+        bulletPower = PlayerStatManager.Instance.BulletPower;
 
-        attackDamage = PlayerStatusManager.Instance.AttackDamage;
+        attackDamage = PlayerStatManager.Instance.AttackDamage;
 
-        explosionDamage = PlayerStatusManager.Instance.ExplosionDamage;
-        explosionRange = PlayerStatusManager.Instance.ExplosionRange;
+        explosionDamage = PlayerStatManager.Instance.ExplosionDamage;
+        explosionRange = PlayerStatManager.Instance.ExplosionRange;
 
-        poisonDamage = PlayerStatusManager.Instance.PoisonDamage;
-        poisonCount = PlayerStatusManager.Instance.PoisonCount;
+        poisonDamage = PlayerStatManager.Instance.PoisonDamage;
+        poisonCount = PlayerStatManager.Instance.PoisonCount;
 
-        freezeTime = PlayerStatusManager.Instance.FreezeTime;
+        freezeTime = PlayerStatManager.Instance.FreezeTime;
 
-        maxBulletCount = PlayerStatusManager.Instance.MaxBulletCount;
+        maxBulletCount = PlayerStatManager.Instance.MaxBulletCount;
 
-        reloadTime = PlayerStatusManager.Instance.ReloadTime;
+        reloadTime = PlayerStatManager.Instance.ReloadTime;
     }
 
     [PunRPC]

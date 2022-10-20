@@ -34,7 +34,6 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     // Photon Server에 접속하는 함수
     void Connect()
     {
-        Debug.Log("Connect호출 !!");
         if (PhotonNetwork.IsConnected == false)
         {
             //PhotonNetwork.JoinRandomRoom();

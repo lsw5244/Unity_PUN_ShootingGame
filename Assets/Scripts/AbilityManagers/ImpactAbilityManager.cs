@@ -32,14 +32,14 @@ public class ImpactAbilityManager : MonoBehaviour
 
     public void AddBulletExplosion()
     {
-        if(PlayerStatusManager.Instance.ExplosionDamage <= 0f)
+        if(PlayerStatManager.Instance.ExplosionDamage <= 0f)
         {
             impactAbility -= BulletExplosion;
             impactAbility += BulletExplosion;
-            PlayerStatusManager.Instance.ExplosionRange = 1f;
+            PlayerStatManager.Instance.ExplosionRange = 1f;
         }
         // 폭발 데미지는 20씩 증가하도록 구현
-        PlayerStatusManager.Instance.ExplosionDamage += 20f;
+        PlayerStatManager.Instance.ExplosionDamage += 20f;
     }
 
     void BulletExplosion(GameObject Player, Vector3 BulletPos)

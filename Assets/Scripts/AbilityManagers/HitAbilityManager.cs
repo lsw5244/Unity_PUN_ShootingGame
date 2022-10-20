@@ -32,14 +32,14 @@ public class HitAbilityManager : MonoBehaviour
 
     public void AddPoisonBullet()
     {
-        if(PlayerStatusManager.Instance.PoisonDamage <= 0f)
+        if(PlayerStatManager.Instance.PoisonDamage <= 0f)
         {
             hitAbility -= PoisonBullet;
             hitAbility += PoisonBullet;
-            PlayerStatusManager.Instance.PoisonCount = 3;
+            PlayerStatManager.Instance.PoisonCount = 3;
         }
         // 틱당 중독 데미지가 10씩 증가하도록 구현
-        PlayerStatusManager.Instance.PoisonDamage += 10f;
+        PlayerStatManager.Instance.PoisonDamage += 10f;
     }
 
     void PoisonBullet(GameObject ShootPlayer, GameObject HitPlayer)
@@ -52,13 +52,13 @@ public class HitAbilityManager : MonoBehaviour
 
     public void AddFreezeBullet()
     {
-        if(PlayerStatusManager.Instance.FreezeTime <= 0f)
+        if(PlayerStatManager.Instance.FreezeTime <= 0f)
         {
             hitAbility -= FreezeBullet;
             hitAbility += FreezeBullet;
         }
 
-        PlayerStatusManager.Instance.FreezeTime += 0.5f;
+        PlayerStatManager.Instance.FreezeTime += 0.5f;
     }
 
     void FreezeBullet(GameObject ShootPlayer, GameObject HitPlayer)
