@@ -17,9 +17,8 @@ public class Wall : MonoBehaviour
     {
         if(coll.gameObject.CompareTag("Player") == true)
         {
-            coll.gameObject.GetComponent<PlayerDebuff>().StartMoveFreeze(freezeTime);
-            coll.gameObject.GetComponent<PlayerState>().WallHit(wallType, pushPower, damage);
-            
+            coll.gameObject.GetComponent<IDebuff>().StartMoveFreeze(freezeTime);
+            coll.gameObject.GetComponent<PlayerState>().WallHit(wallType, pushPower, damage);            
         }
     }
 }

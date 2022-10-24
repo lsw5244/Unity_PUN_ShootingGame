@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 using Photon.Pun;
 
-public class PlayerDebuff : MonoBehaviour
+public class PlayerDebuff : MonoBehaviour, IDebuff
 {
     private PlayerState playerState;
     private SpriteRenderer spriteRenderer;

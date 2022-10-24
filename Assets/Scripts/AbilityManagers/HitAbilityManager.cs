@@ -47,7 +47,7 @@ public class HitAbilityManager : MonoBehaviour
         float poisonDamage = ShootPlayer.GetComponent<PlayerState>().poisonDamage;
         int poisonCount = ShootPlayer.GetComponent<PlayerState>().poisonCount;
 
-        HitPlayer.GetComponent<PlayerDebuff>().StartPoison(poisonDamage, poisonCount);
+        HitPlayer.GetComponent<IDebuff>().StartPoison(poisonDamage, poisonCount);
     }
 
     public void AddFreezeBullet()
@@ -63,6 +63,6 @@ public class HitAbilityManager : MonoBehaviour
 
     void FreezeBullet(GameObject ShootPlayer, GameObject HitPlayer)
     {
-        HitPlayer.GetComponent<PlayerDebuff>().StartMoveFreeze(ShootPlayer.GetComponent<PlayerState>().freezeTime);
+        HitPlayer.GetComponent<IDebuff>().StartMoveFreeze(ShootPlayer.GetComponent<PlayerState>().freezeTime);
     }
 }
