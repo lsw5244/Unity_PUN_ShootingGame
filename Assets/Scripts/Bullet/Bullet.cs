@@ -18,17 +18,25 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Shoot(Vector2 mousePosition, float bulletPower, float attackDamage)
+    public void Shoot(Vector2 mousePosition, float bulletPower, float attackDamage, Vector3 position)
     {
-        photonView.RPC("Fire", RpcTarget.All, mousePosition, bulletPower, attackDamage);
+        //transform.position = position;
+        photonView.RPC("Fire", RpcTarget.All, mousePosition, bulletPower, attackDamage, position);
     }
 
     [PunRPC]
-    void Fire(Vector2 mousePosition, float bulletPower, float attackDamage)
+    void Fire(Vector2 mousePosition, float bulletPower, float attackDamage, Vector3 position)
     {
+        transform.position = position;
         gameObject.SetActive(true);
-        Vector2 shootDirection = (mousePosition - (Vector2)transform.position).normalized;
-        GetComponent<Rigidbody2D>().AddForce(shootDirection * bulletPower);
+
+        if(GetComponent<PhotonView>().IsMine == true)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            Vector2 shootDirection = (mousePosition - (Vector2)transform.position).normalized;
+            GetComponent<Rigidbody2D>().AddForce(shootDirection * bulletPower);
+        }
     }
 
     private void Update()

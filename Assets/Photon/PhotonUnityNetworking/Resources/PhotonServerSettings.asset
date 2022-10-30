@@ -82,6 +82,8 @@ MonoBehaviour:
   - SettingfreezeProgressBarFillAmount
   - PlayerCreate
   - RoundSetting
+  - SetActive
+  - ActiveTrue
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

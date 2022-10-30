@@ -71,8 +71,8 @@ public class PlayerFire : MonoBehaviour
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GunPivotSetting();
 
-            Fire();
-
+            Fire();                       
+            
             if(Input.GetKeyDown(KeyCode.R) && canFire == true)
             {
                 photonView.RPC("Reload", RpcTarget.All);
@@ -89,14 +89,14 @@ public class PlayerFire : MonoBehaviour
                 return;
             }
 
-            if(currentBulletCount <= 0)
+            if (currentBulletCount <= 0)
             {
                 Reload();
                 return;
             }
 
             StartCoroutine(ShootingDelay());
-
+            
             Vector2 toMousePosition = mousePosition - (Vector2)gunPivot.position;
 
             float dot = Vector2.Dot(gunPivot.right, toMousePosition);   // 좌- 우+ 확인 가능
@@ -105,8 +105,8 @@ public class PlayerFire : MonoBehaviour
             selectBullet = GetBullet();
             if(selectBullet != null)
             {
-                selectBullet.transform.position = firePos.position;
-                selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
+                //selectBullet.transform.position = firePos.position;                
+                selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage, firePos.position);
 
                 bulletCountUIs[currentBulletCount - 1].GetComponent<BulletCountUI>().SetActive(false);
                 --currentBulletCount;
