@@ -28,6 +28,8 @@ public class Bullet : MonoBehaviour
     void Fire(Vector2 mousePosition, float bulletPower, float attackDamage, Vector3 position)
     {
         transform.position = position;
+        transform.rotation = Quaternion.identity;
+
         gameObject.SetActive(true);
 
         if(GetComponent<PhotonView>().IsMine == true)
