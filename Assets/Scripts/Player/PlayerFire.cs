@@ -91,7 +91,7 @@ public class PlayerFire : MonoBehaviour
 
             if (currentBulletCount <= 0)
             {
-                Reload();
+                photonView.RPC("Reload", RpcTarget.All);
                 return;
             }
 
