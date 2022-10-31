@@ -18,18 +18,14 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Shoot(Vector2 mousePosition, float bulletPower, float attackDamage, Vector3 position)
+    public void Shoot(Vector2 mousePosition, float bulletPower, float attackDamage)
     {
-        //transform.position = position;
-        photonView.RPC("Fire", RpcTarget.All, mousePosition, bulletPower, attackDamage, position);
+        photonView.RPC("Fire", RpcTarget.All, mousePosition, bulletPower, attackDamage);
     }
 
     [PunRPC]
-    void Fire(Vector2 mousePosition, float bulletPower, float attackDamage, Vector3 position)
+    void Fire(Vector2 mousePosition, float bulletPower, float attackDamage)
     {
-        transform.position = position;
-        LookVelocityDirection();
-
         gameObject.SetActive(true);
 
         if(GetComponent<PhotonView>().IsMine == true)
@@ -89,6 +85,10 @@ public class Bullet : MonoBehaviour
         {
             ImpactAbilityManager.Instance.impactAbility(shootPlayer, transform.position);
         }
+
+        // 총알이 사용 된 후 임의의 위치로 옮겨놓기
+        transform.position = Vector2.zero * 10f;
+        transform.rotation = Quaternion.identity;
 
         this.gameObject.SetActive(false);
     }

@@ -105,8 +105,8 @@ public class PlayerFire : MonoBehaviour
             selectBullet = GetBullet();
             if(selectBullet != null)
             {
-                //selectBullet.transform.position = firePos.position;                
-                selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage, firePos.position);
+                selectBullet.transform.position = firePos.position;                
+                selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
 
                 bulletCountUIs[currentBulletCount - 1].GetComponent<BulletCountUI>().SetActive(false);
                 --currentBulletCount;
@@ -167,7 +167,6 @@ public class PlayerFire : MonoBehaviour
         canFire = false;
 
         // 기다리기 (장전 쿨타임)
-        //yield return new WaitForSeconds(state.reloadTime);
         float runTime = 0.0f;      
         while (runTime < state.reloadTime)
         {
