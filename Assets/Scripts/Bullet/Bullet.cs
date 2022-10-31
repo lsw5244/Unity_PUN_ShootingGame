@@ -94,7 +94,7 @@ public class Bullet : MonoBehaviour
             }
         }
                 
-        if (ImpactAbilityManager.Instance.impactAbility != null && /*photonView.IsMine == true*/ shootPlayer != null)
+        if (ImpactAbilityManager.Instance.impactAbility != null && photonView.IsMine == true /*shootPlayer != null*/)
         {
             ImpactAbilityManager.Instance.impactAbility(shootPlayer, transform.position);
         }
