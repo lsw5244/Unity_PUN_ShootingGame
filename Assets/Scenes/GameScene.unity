@@ -3845,6 +3845,7 @@ MonoBehaviour:
   pinkPlayerSprite: {fileID: 21300000, guid: 14440fa2471ca0b4486632fa0617ac40, type: 3}
   abilityAdder: {fileID: 2100694837}
   fadeImage: {fileID: 1928565381}
+  playRound: 1
 --- !u!114 &1672688180
 MonoBehaviour:
   m_ObjectHideFlags: 0

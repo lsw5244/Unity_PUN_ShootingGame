@@ -97,16 +97,13 @@ public class PlayerFire : MonoBehaviour
 
             StartCoroutine(ShootingDelay());
             
-            Vector2 toMousePosition = mousePosition - (Vector2)gunPivot.position;
-
-            float dot = Vector2.Dot(gunPivot.right, toMousePosition);   // 좌- 우+ 확인 가능
-            float angle = Mathf.Acos(dot / toMousePosition.magnitude) * Mathf.Rad2Deg;    // 마우스 포인터와의 각도
-
             selectBullet = GetBullet();
             if(selectBullet != null)
             {
-                selectBullet.transform.position = firePos.position;                
-                selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower, state.attackDamage);
+                //selectBullet.transform.position = firePos.position;
+                selectBullet.GetComponent<Bullet>().SetPosition(firePos.position);
+
+                selectBullet.GetComponent<Bullet>().Shoot(mousePosition, state.bulletPower);
 
                 bulletCountUIs[currentBulletCount - 1].GetComponent<BulletCountUI>().SetActive(false);
                 --currentBulletCount;
