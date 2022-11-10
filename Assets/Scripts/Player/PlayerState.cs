@@ -47,12 +47,12 @@ public class PlayerState : MonoBehaviour//, IPunObservable
         photonView = GetComponent<PhotonView>();
         if(photonView.IsMine == true)
         {
-            StatusInit();
+            StatInit();
         }
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }
 
-    void StatusInit()
+    void StatInit()
     {
         maxHP = PlayerStatManager.Instance.MaxHP;
         HP = maxHP;
