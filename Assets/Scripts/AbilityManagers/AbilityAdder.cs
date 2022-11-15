@@ -100,7 +100,9 @@ public class AbilityAdder : MonoBehaviour, IPunObservable
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                string selectAbilityName = addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]];
+                //string selectAbilityName = addAbilityNames[randomAbilityIdxs[currentSelectAbilityIdx]];
+                int selectAbilityIdx = randomAbilityIdxs[currentSelectAbilityIdx];
+                string selectAbilityName = addAbilityNames[selectAbilityIdx];
                 System.Type type = this.GetType();
 
                 MethodInfo mi = type.GetMethod(selectAbilityName, BindingFlags.NonPublic | BindingFlags.Instance);
