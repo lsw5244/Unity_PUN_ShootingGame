@@ -61,12 +61,13 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
     bool EnterRoom(string RoomName)
     {
-        if (PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null))
-        {
-            return true;
-        }
+        return PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null);
+        //if (PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null))
+        //{
+        //    return true;
+        //}
 
-        return false;
+        //return false;
     }
 
     public override void OnConnectedToMaster()
